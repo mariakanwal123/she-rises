@@ -1,0 +1,2084 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SHE RISES — Women's Empowerment</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Fraunces:ital,wght@0,300;0,700;1,300;1,700&family=IBM+Plex+Mono:wght@400;600&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink: #0D0D0D;
+  --paper: #F5F0E8;
+  --saffron: #E8821A;
+  --teal: #1A7A6B;
+  --teal-light: #C8EDE7;
+  --saffron-light: #FDECD4;
+  --crimson: #C0392B;
+  --slate: #2C3E50;
+  --warm-gray: #8B7355;
+  --line: #D4C9B0;
+  --white: #FAFAF7;
+}
+
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+
+body {
+  font-family: 'Lora', Georgia, serif;
+  background: var(--paper);
+  color: var(--ink);
+  overflow-x: hidden;
+  cursor: none;
+}
+
+/* CUSTOM CURSOR */
+.cursor {
+  width: 12px; height: 12px;
+  background: var(--saffron);
+  border-radius: 50%;
+  position: fixed; pointer-events: none;
+  z-index: 99999;
+  transform: translate(-50%,-50%);
+  transition: transform 0.1s, width 0.2s, height 0.2s, background 0.2s;
+  mix-blend-mode: multiply;
+}
+.cursor-ring {
+  width: 36px; height: 36px;
+  border: 1.5px solid var(--ink);
+  border-radius: 50%;
+  position: fixed; pointer-events: none;
+  z-index: 99998;
+  transform: translate(-50%,-50%);
+  transition: transform 0.15s ease, width 0.3s, height 0.3s;
+}
+body:hover .cursor { opacity:1; }
+
+/* SCROLLBAR */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: var(--paper); }
+::-webkit-scrollbar-thumb { background: var(--saffron); }
+
+/* ======= NAVBAR ======= */
+nav {
+  position: fixed; top:0; left:0; right:0; z-index:1000;
+  background: var(--ink);
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 4vw;
+  height: 60px;
+  border-bottom: 3px solid var(--saffron);
+}
+
+.logo-text {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.8rem;
+  letter-spacing: 0.08em;
+  color: var(--white);
+  cursor: pointer;
+  transition: color 0.2s;
+}
+.logo-text span { color: var(--saffron); }
+.logo-text:hover { color: var(--saffron); }
+
+.nav-links {
+  display: flex; gap: 0; list-style: none;
+}
+.nav-links li a {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.6);
+  text-decoration: none;
+  padding: 0 1.2rem;
+  cursor: pointer;
+  transition: color 0.2s, background 0.2s;
+  height: 60px;
+  display: flex; align-items: center;
+  border-right: 1px solid rgba(255,255,255,0.08);
+}
+.nav-links li a:hover, .nav-links li a.active {
+  color: var(--ink);
+  background: var(--saffron);
+}
+
+.nav-admin-btn {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  background: none;
+  border: 1px solid var(--teal);
+  color: var(--teal);
+  padding: 0.4rem 1rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  text-transform: uppercase;
+}
+.nav-admin-btn:hover { background: var(--teal); color: white; }
+.nav-logout-btn {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.7rem;
+  font-weight: 600;
+  background: var(--crimson);
+  border: none;
+  color: white;
+  padding: 0.4rem 1rem;
+  cursor: pointer;
+  display: none;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+/* ======= PAGES ======= */
+.page { display: none; padding-top: 60px; min-height: 100vh; }
+.page.active { display: block; }
+
+/* ======= HOME PAGE ======= */
+
+/* HERO — EDITORIAL GRID */
+.hero-editorial {
+  display: grid;
+  grid-template-columns: 1fr 2px 1fr 2px 1fr;
+  grid-template-rows: auto;
+  min-height: calc(100vh - 60px);
+  background: var(--ink);
+}
+
+.hero-divider { background: var(--saffron); }
+
+.hero-col-left {
+  padding: 5vw 4vw;
+  display: flex; flex-direction: column; justify-content: space-between;
+  border-right: 2px solid var(--saffron);
+}
+.hero-issue-tag {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.68rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--saffron);
+  margin-bottom: 3rem;
+}
+.hero-col-left h1 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(5rem, 10vw, 9rem);
+  line-height: 0.9;
+  color: var(--white);
+  letter-spacing: 0.02em;
+}
+.hero-col-left h1 .accent { color: var(--saffron); display: block; }
+.hero-tagline {
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+  font-size: 1rem;
+  color: rgba(255,255,255,0.5);
+  line-height: 1.6;
+  margin-top: 2rem;
+  max-width: 260px;
+}
+
+.hero-col-mid {
+  position: relative;
+  overflow: hidden;
+}
+.hero-col-mid img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  filter: grayscale(20%) contrast(1.1);
+  transition: filter 0.5s;
+}
+.hero-col-mid:hover img { filter: grayscale(0%) contrast(1); }
+.hero-mid-overlay {
+  position: absolute; bottom: 0; left: 0; right: 0;
+  background: linear-gradient(transparent, rgba(13,13,13,0.9));
+  padding: 3rem 2rem 2rem;
+}
+.hero-mid-overlay p {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  color: rgba(255,255,255,0.6);
+  text-transform: uppercase;
+}
+
+.hero-col-right {
+  padding: 5vw 4vw;
+  display: flex; flex-direction: column; justify-content: space-between;
+  border-left: 2px solid var(--saffron);
+}
+.hero-right-quote {
+  font-family: 'Fraunces', serif;
+  font-size: clamp(1.1rem, 2vw, 1.4rem);
+  font-weight: 700;
+  color: var(--white);
+  line-height: 1.4;
+  border-left: 3px solid var(--saffron);
+  padding-left: 1.5rem;
+  margin-top: 4rem;
+}
+.hero-right-quote cite {
+  display: block;
+  margin-top: 1rem;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.7rem;
+  font-style: normal;
+  letter-spacing: 0.1em;
+  color: var(--saffron);
+}
+.hero-stats-row {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 1px;
+  border: 1px solid rgba(255,255,255,0.1);
+}
+.hero-stat {
+  padding: 1.5rem;
+  border: 1px solid rgba(255,255,255,0.08);
+}
+.hero-stat-num {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 2.8rem;
+  color: var(--saffron);
+  line-height: 1;
+}
+.hero-stat-label {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.65rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.4);
+  margin-top: 0.3rem;
+}
+
+/* MARQUEE TICKER */
+.ticker {
+  background: var(--saffron);
+  overflow: hidden;
+  white-space: nowrap;
+  padding: 0.6rem 0;
+  border-top: 2px solid var(--ink);
+}
+.ticker-inner {
+  display: inline-block;
+  animation: ticker 25s linear infinite;
+}
+.ticker-inner span {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink);
+  margin: 0 3rem;
+}
+@keyframes ticker { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+
+/* PILLARS — HORIZONTAL SCROLL CARDS */
+.section-header {
+  display: flex; align-items: baseline; gap: 1.5rem;
+  padding: 4rem 6vw 2rem;
+  border-bottom: 2px solid var(--ink);
+}
+.section-number {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.7rem;
+  color: var(--warm-gray);
+  letter-spacing: 0.1em;
+}
+.section-title-big {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  letter-spacing: 0.05em;
+  color: var(--ink);
+}
+.section-line {
+  flex: 1;
+  height: 1px;
+  background: var(--line);
+}
+
+.pillars-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  border-bottom: 2px solid var(--ink);
+}
+.pillar-item {
+  border-right: 1px solid var(--line);
+  overflow: hidden;
+  position: relative;
+  aspect-ratio: 3/4;
+  cursor: pointer;
+}
+.pillar-item:last-child { border-right: none; }
+.pillar-item img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s ease;
+  filter: grayscale(40%);
+}
+.pillar-item:hover img { transform: scale(1.08); filter: grayscale(0%); }
+.pillar-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(to top, rgba(13,13,13,0.95) 0%, rgba(13,13,13,0.2) 60%, transparent 100%);
+  display: flex; flex-direction: column; justify-content: flex-end;
+  padding: 2rem 1.5rem;
+  transition: background 0.3s;
+}
+.pillar-num {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.65rem;
+  letter-spacing: 0.15em;
+  color: var(--saffron);
+  text-transform: uppercase;
+  margin-bottom: 0.5rem;
+}
+.pillar-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.6rem;
+  letter-spacing: 0.05em;
+  color: var(--white);
+  line-height: 1;
+  margin-bottom: 0.5rem;
+}
+.pillar-desc {
+  font-family: 'Lora', serif;
+  font-size: 0.8rem;
+  color: rgba(255,255,255,0.6);
+  line-height: 1.5;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s ease;
+}
+.pillar-item:hover .pillar-desc { max-height: 100px; }
+
+/* FEATURED GRID */
+.featured-grid {
+  display: grid;
+  grid-template-columns: 3fr 2px 2fr;
+  border-bottom: 2px solid var(--ink);
+}
+.feat-main {
+  padding: 4rem 6vw;
+  background: var(--teal);
+  position: relative;
+  overflow: hidden;
+}
+.feat-main::before {
+  content: '"';
+  position: absolute;
+  font-family: 'Fraunces', serif;
+  font-size: 25rem;
+  color: rgba(255,255,255,0.04);
+  top: -4rem; left: -2rem;
+  line-height: 1;
+}
+.feat-label {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.65rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.5);
+  margin-bottom: 2rem;
+}
+.feat-main h2 {
+  font-family: 'Fraunces', serif;
+  font-size: clamp(1.8rem, 3vw, 2.8rem);
+  color: var(--white);
+  font-weight: 700;
+  line-height: 1.2;
+  margin-bottom: 1.5rem;
+}
+.feat-main p {
+  font-size: 1rem;
+  color: rgba(255,255,255,0.7);
+  line-height: 1.8;
+  margin-bottom: 2rem;
+  max-width: 520px;
+}
+.feat-divider { background: var(--ink); }
+.feat-sidebar { padding: 0; }
+.feat-side-item {
+  padding: 2rem 3rem;
+  border-bottom: 1px solid var(--line);
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.feat-side-item:hover { background: var(--saffron-light); }
+.feat-side-item:last-child { border-bottom: none; }
+.feat-side-cat {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.62rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--saffron);
+  margin-bottom: 0.5rem;
+}
+.feat-side-item h4 {
+  font-family: 'Fraunces', serif;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--ink);
+  line-height: 1.3;
+}
+
+/* BUTTON STYLES */
+.btn-ink {
+  display: inline-block;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  background: var(--ink);
+  color: var(--white);
+  padding: 0.8rem 2rem;
+  border: 2px solid var(--ink);
+  cursor: pointer;
+  transition: all 0.2s;
+  text-decoration: none;
+}
+.btn-ink:hover { background: transparent; color: var(--ink); }
+.btn-saffron {
+  display: inline-block;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  background: var(--saffron);
+  color: var(--ink);
+  padding: 0.8rem 2rem;
+  border: 2px solid var(--saffron);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.btn-saffron:hover { background: transparent; color: var(--saffron); }
+.btn-white {
+  display: inline-block;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  background: transparent;
+  color: var(--white);
+  padding: 0.8rem 2rem;
+  border: 2px solid var(--white);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.btn-white:hover { background: var(--white); color: var(--ink); }
+
+/* ======= ABOUT PAGE ======= */
+.about-banner {
+  background: var(--teal);
+  padding: 6rem 6vw 4rem;
+  position: relative;
+  overflow: hidden;
+}
+.about-banner::after {
+  content: 'SHE';
+  position: absolute;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 22rem;
+  color: rgba(255,255,255,0.04);
+  right: -2rem; top: -2rem;
+  line-height: 1;
+  pointer-events: none;
+}
+.about-banner h1 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(3rem, 8vw, 7rem);
+  color: var(--white);
+  line-height: 0.9;
+  letter-spacing: 0.02em;
+}
+.about-banner h1 em {
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+  font-size: 0.65em;
+  color: var(--saffron);
+  display: block;
+}
+.about-banner p {
+  color: rgba(255,255,255,0.7);
+  font-size: 1.05rem;
+  line-height: 1.8;
+  max-width: 560px;
+  margin-top: 2rem;
+}
+
+.about-grid-2col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  border-top: 2px solid var(--ink);
+}
+.about-col {
+  padding: 4rem 6vw;
+  border-right: 1px solid var(--line);
+}
+.about-col:last-child { border-right: none; }
+.about-col h2 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 2rem;
+  letter-spacing: 0.05em;
+  color: var(--ink);
+  margin-bottom: 1.5rem;
+}
+.about-col p {
+  font-size: 0.95rem;
+  line-height: 1.8;
+  color: #444;
+  margin-bottom: 1rem;
+}
+
+.values-strip {
+  background: var(--ink);
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  border-top: 2px solid var(--saffron);
+}
+.value-block {
+  padding: 3rem 2.5rem;
+  border-right: 1px solid rgba(255,255,255,0.08);
+  position: relative;
+}
+.value-block:last-child { border-right: none; }
+.value-num {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 3rem;
+  color: var(--saffron);
+  opacity: 0.3;
+  font-weight: 600;
+  line-height: 1;
+  margin-bottom: 1rem;
+}
+.value-block h3 {
+  font-family: 'Fraunces', serif;
+  font-size: 1.1rem;
+  color: var(--white);
+  margin-bottom: 0.7rem;
+}
+.value-block p { font-size: 0.85rem; color: rgba(255,255,255,0.45); line-height: 1.6; }
+
+.team-editorial {
+  padding: 4rem 6vw;
+  border-top: 2px solid var(--ink);
+}
+.team-editorial h2 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 2.5rem;
+  letter-spacing: 0.05em;
+  margin-bottom: 3rem;
+  border-bottom: 1px solid var(--line);
+  padding-bottom: 1rem;
+}
+.team-grid-ed {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0;
+}
+.team-card-ed {
+  border: 1px solid var(--line);
+  padding: 2rem;
+  position: relative;
+  transition: background 0.2s;
+}
+.team-card-ed:hover { background: var(--saffron-light); }
+.team-card-ed img {
+  width: 100%; aspect-ratio: 1;
+  object-fit: cover;
+  filter: grayscale(60%);
+  margin-bottom: 1rem;
+  transition: filter 0.3s;
+}
+.team-card-ed:hover img { filter: grayscale(0%); }
+.team-card-ed h4 {
+  font-family: 'Fraunces', serif;
+  font-size: 1rem;
+  font-weight: 700;
+  margin-bottom: 0.2rem;
+}
+.team-card-ed .role {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.65rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--saffron);
+  margin-bottom: 0.7rem;
+}
+.team-card-ed p { font-size: 0.82rem; color: var(--warm-gray); line-height: 1.5; }
+
+/* ======= CONTACT PAGE ======= */
+.contact-masthead {
+  background: var(--ink);
+  padding: 5rem 6vw;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6rem;
+  align-items: end;
+  border-bottom: 3px solid var(--saffron);
+}
+.contact-masthead h1 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(4rem, 10vw, 8rem);
+  color: var(--white);
+  line-height: 0.85;
+  letter-spacing: 0.02em;
+}
+.contact-masthead h1 em {
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+  color: var(--saffron);
+}
+.contact-info-list { list-style: none; }
+.contact-info-list li {
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+  padding: 1.2rem 0;
+  display: flex; gap: 2rem; align-items: flex-start;
+}
+.ci-label {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.62rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--saffron);
+  min-width: 80px;
+  margin-top: 0.2rem;
+}
+.ci-value { color: rgba(255,255,255,0.7); font-size: 0.9rem; line-height: 1.5; }
+
+.contact-form-area {
+  display: grid;
+  grid-template-columns: 5fr 3fr;
+  border-bottom: 2px solid var(--ink);
+}
+.contact-form-panel {
+  padding: 4rem 6vw;
+  border-right: 1px solid var(--line);
+}
+.contact-form-panel h2 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 2rem;
+  letter-spacing: 0.05em;
+  margin-bottom: 2rem;
+}
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+.fg { margin-bottom: 1.5rem; }
+.fg label {
+  display: block;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.65rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--warm-gray);
+  margin-bottom: 0.5rem;
+}
+.fg input, .fg textarea, .fg select {
+  width: 100%;
+  padding: 0.8rem 0;
+  border: none;
+  border-bottom: 2px solid var(--line);
+  background: transparent;
+  font-family: 'Lora', serif;
+  font-size: 0.95rem;
+  color: var(--ink);
+  outline: none;
+  transition: border-color 0.2s;
+}
+.fg input:focus, .fg textarea:focus { border-color: var(--saffron); }
+.fg textarea { min-height: 120px; resize: vertical; }
+.fg select { cursor: pointer; }
+
+.contact-sidebar-panel {
+  padding: 4rem 3rem;
+  background: var(--teal-light);
+}
+.contact-sidebar-panel h3 {
+  font-family: 'Fraunces', serif;
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+}
+.contact-img-block { margin-bottom: 2rem; }
+.contact-img-block img {
+  width: 100%;
+  aspect-ratio: 4/3;
+  object-fit: cover;
+  filter: grayscale(20%);
+  margin-bottom: 0.8rem;
+}
+.contact-img-block p { font-size: 0.82rem; color: var(--teal); line-height: 1.5; }
+
+/* ======= BLOGS PAGE ======= */
+.blogs-masthead {
+  background: var(--paper);
+  padding: 3rem 6vw;
+  border-bottom: 2px solid var(--ink);
+  display: flex; align-items: flex-end; justify-content: space-between;
+}
+.blogs-masthead h1 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(3rem, 7vw, 6rem);
+  letter-spacing: 0.03em;
+  line-height: 0.85;
+  color: var(--ink);
+}
+.blogs-masthead h1 span {
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+  font-size: 0.45em;
+  color: var(--teal);
+  display: block;
+  letter-spacing: 0;
+  font-weight: 300;
+}
+.blogs-masthead-right { text-align: right; }
+.blog-count {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.68rem;
+  letter-spacing: 0.1em;
+  color: var(--warm-gray);
+  margin-bottom: 1rem;
+}
+.add-blog-btn {
+  display: none;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  background: var(--teal);
+  color: var(--white);
+  border: none;
+  padding: 0.7rem 1.5rem;
+  cursor: pointer;
+  transition: background 0.2s;
+  align-items: center; gap: 0.5rem;
+}
+.add-blog-btn:hover { background: var(--ink); }
+.add-blog-btn.visible { display: flex; }
+
+.blogs-filter-bar {
+  display: flex; gap: 0;
+  border-bottom: 2px solid var(--ink);
+  overflow-x: auto;
+}
+.fbtn {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 0.8rem 1.5rem;
+  border: none;
+  border-right: 1px solid var(--line);
+  background: transparent;
+  color: var(--warm-gray);
+  cursor: pointer;
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+.fbtn:hover, .fbtn.active {
+  background: var(--ink);
+  color: var(--saffron);
+}
+
+/* BLOGS GRID — NEWSPAPER STYLE */
+.blogs-newspaper {
+  padding: 0 6vw 4rem;
+}
+.blogs-row-big {
+  display: grid;
+  grid-template-columns: 2fr 1px 1fr 1px 1fr;
+  border-bottom: 1px solid var(--line);
+  margin-bottom: 0;
+}
+.blog-col-divider { background: var(--line); }
+.blog-big-card {
+  padding: 3rem 3rem 3rem 0;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+.blog-big-card:hover { opacity: 0.8; }
+.blog-big-card img {
+  width: 100%;
+  aspect-ratio: 16/9;
+  object-fit: cover;
+  filter: grayscale(20%);
+  margin-bottom: 1.5rem;
+  transition: filter 0.3s;
+}
+.blog-big-card:hover img { filter: grayscale(0%); }
+.blog-sm-card {
+  padding: 2rem 2rem;
+  cursor: pointer;
+  border-top: none;
+  transition: background 0.2s;
+}
+.blog-sm-card:hover { background: var(--saffron-light); }
+.blog-sm-card img {
+  width: 100%;
+  aspect-ratio: 3/2;
+  object-fit: cover;
+  filter: grayscale(30%);
+  margin-bottom: 1rem;
+  transition: filter 0.3s;
+}
+.blog-sm-card:hover img { filter: grayscale(0%); }
+
+.blogs-row-small {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  border-bottom: 1px solid var(--line);
+}
+.blog-mini-card {
+  padding: 2rem 1.5rem;
+  border-right: 1px solid var(--line);
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.blog-mini-card:last-child { border-right: none; }
+.blog-mini-card:hover { background: var(--teal-light); }
+.blog-mini-card img {
+  width: 100%;
+  aspect-ratio: 4/3;
+  object-fit: cover;
+  filter: grayscale(40%);
+  margin-bottom: 1rem;
+  transition: filter 0.3s;
+}
+.blog-mini-card:hover img { filter: grayscale(0%); }
+
+.blog-cat-label {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.6rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--saffron);
+  margin-bottom: 0.4rem;
+  display: flex; align-items: center; gap: 0.5rem;
+}
+.blog-cat-label::before { content: '●'; font-size: 0.4rem; }
+.blog-card-title {
+  font-family: 'Fraunces', serif;
+  color: var(--ink);
+  font-weight: 700;
+  line-height: 1.25;
+  margin-bottom: 0.6rem;
+}
+.blog-big-card .blog-card-title { font-size: clamp(1.3rem, 2.5vw, 1.9rem); }
+.blog-sm-card .blog-card-title { font-size: 1.05rem; }
+.blog-mini-card .blog-card-title { font-size: 0.92rem; }
+.blog-excerpt {
+  font-size: 0.88rem;
+  color: var(--warm-gray);
+  line-height: 1.65;
+  margin-bottom: 1rem;
+}
+.blog-meta {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.6rem;
+  letter-spacing: 0.05em;
+  color: var(--warm-gray);
+  display: flex; gap: 1rem;
+}
+.blog-read-link {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--teal);
+  text-decoration: none;
+  display: inline-block;
+  margin-top: 0.8rem;
+  border-bottom: 1px solid var(--teal);
+  padding-bottom: 0.1rem;
+  transition: color 0.2s, border-color 0.2s;
+}
+.blog-read-link:hover { color: var(--saffron); border-color: var(--saffron); }
+
+/* Edit badge for admin */
+.admin-edit-badge {
+  display: none;
+  position: absolute;
+  top: 0.5rem; right: 0.5rem;
+  background: var(--saffron);
+  color: var(--ink);
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.6rem;
+  font-weight: 600;
+  padding: 0.2rem 0.5rem;
+  cursor: pointer;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  z-index: 10;
+}
+.is-admin .admin-edit-badge { display: block; }
+
+/* ======= BLOG FULL VIEW ======= */
+#blog-full-view {
+  display: none; padding-top: 60px;
+  background: var(--paper); min-height: 100vh;
+}
+#blog-full-view.active { display: block; }
+
+.blog-full-hero {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: 70vh;
+  border-bottom: 2px solid var(--ink);
+}
+.blog-full-hero-text {
+  padding: 5rem 6vw;
+  background: var(--ink);
+  display: flex; flex-direction: column; justify-content: flex-end;
+}
+.blog-full-hero-text .cat-badge {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.65rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--saffron);
+  margin-bottom: 1.5rem;
+  display: flex; align-items: center; gap: 0.5rem;
+}
+.blog-full-hero-text h1 {
+  font-family: 'Fraunces', serif;
+  font-size: clamp(1.8rem, 4vw, 3rem);
+  color: var(--white);
+  font-weight: 700;
+  line-height: 1.2;
+  margin-bottom: 1.5rem;
+}
+.blog-full-hero-text .hero-meta {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.65rem;
+  letter-spacing: 0.08em;
+  color: rgba(255,255,255,0.4);
+  display: flex; gap: 1.5rem; flex-wrap: wrap;
+}
+.blog-full-hero-img { overflow: hidden; }
+.blog-full-hero-img img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  filter: grayscale(20%);
+}
+
+.blog-full-content {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 5rem 4vw;
+}
+.blog-full-content p {
+  font-size: 1.05rem;
+  line-height: 1.85;
+  color: #2A2A2A;
+  margin-bottom: 1.4rem;
+}
+.blog-full-content h2 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.8rem;
+  letter-spacing: 0.05em;
+  color: var(--ink);
+  margin: 2.5rem 0 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--line);
+}
+.blog-full-content h3 {
+  font-family: 'Fraunces', serif;
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--teal);
+  margin: 1.5rem 0 0.7rem;
+}
+.blog-full-content ul, .blog-full-content ol {
+  padding-left: 1.5rem; margin-bottom: 1.3rem;
+}
+.blog-full-content li {
+  font-size: 1rem; line-height: 1.8; color: #333; margin-bottom: 0.3rem;
+}
+.blog-full-content .inline-img {
+  width: 100%;
+  aspect-ratio: 16/9;
+  object-fit: cover;
+  margin: 2rem 0;
+  filter: grayscale(10%);
+}
+
+.key-takeaways {
+  background: var(--ink);
+  padding: 2rem 2.5rem;
+  margin: 2.5rem 0;
+  border-left: 4px solid var(--saffron);
+}
+.key-takeaways h3 {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--saffron);
+  margin-bottom: 1.2rem;
+}
+.key-takeaways ul { list-style: none; padding: 0; }
+.key-takeaways li {
+  color: rgba(255,255,255,0.8) !important;
+  font-family: 'Lora', serif;
+  font-size: 0.92rem !important;
+  padding: 0.4rem 0;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  display: flex; gap: 0.8rem;
+}
+.key-takeaways li::before { content: '→'; color: var(--saffron); flex-shrink: 0; }
+.key-takeaways li:last-child { border-bottom: none; }
+
+.conclusion-box {
+  border: 2px solid var(--teal);
+  padding: 2rem 2.5rem;
+  margin: 2rem 0;
+}
+.conclusion-box h3 {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--teal);
+  margin-bottom: 1rem;
+}
+.conclusion-box p { color: var(--slate) !important; }
+
+.faq-section { margin: 3rem 0; }
+.faq-section > h2 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.8rem;
+  letter-spacing: 0.05em;
+  margin-bottom: 1.5rem;
+  border-top: 1px solid var(--line);
+  padding-top: 1rem;
+}
+.faq-item {
+  border-bottom: 1px solid var(--line);
+}
+.faq-q {
+  padding: 1.1rem 0;
+  font-family: 'Fraunces', serif;
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: var(--ink);
+  cursor: pointer;
+  display: flex; justify-content: space-between; align-items: center;
+  transition: color 0.2s;
+}
+.faq-q:hover { color: var(--teal); }
+.faq-q.open { color: var(--saffron); }
+.faq-q .faq-arrow {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 1rem;
+  transition: transform 0.3s;
+  flex-shrink: 0;
+}
+.faq-q.open .faq-arrow { transform: rotate(45deg); }
+.faq-a {
+  max-height: 0; overflow: hidden;
+  transition: max-height 0.35s ease;
+  font-size: 0.9rem; color: var(--warm-gray); line-height: 1.7;
+}
+.faq-a.open { max-height: 200px; padding-bottom: 1rem; }
+
+.back-btn {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink);
+  border: none; background: none;
+  cursor: pointer;
+  padding: 1.5rem 6vw;
+  border-bottom: 1px solid var(--line);
+  width: 100%;
+  text-align: left;
+  transition: color 0.2s;
+}
+.back-btn:hover { color: var(--saffron); }
+
+/* ======= OVERLAYS / MODALS ======= */
+.overlay {
+  display: none; position: fixed; inset: 0; z-index: 9999;
+  background: rgba(13,13,13,0.85);
+  backdrop-filter: blur(4px);
+  align-items: center; justify-content: center;
+}
+.overlay.active { display: flex; }
+.modal {
+  background: var(--paper);
+  border: 2px solid var(--ink);
+  padding: 3rem;
+  width: 90%; max-width: 540px;
+  max-height: 88vh; overflow-y: auto;
+  position: relative;
+}
+.modal.wide { max-width: 720px; }
+.modal-close {
+  position: absolute; top: 1rem; right: 1rem;
+  background: none; border: none; cursor: pointer;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.8rem; font-weight: 600;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--warm-gray);
+  transition: color 0.2s;
+}
+.modal-close:hover { color: var(--crimson); }
+.modal h2 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 2rem;
+  letter-spacing: 0.05em;
+  margin-bottom: 0.3rem;
+}
+.modal p.sub { font-size: 0.82rem; color: var(--warm-gray); margin-bottom: 2rem; }
+
+.tab-row { display: grid; grid-template-columns: 1fr 1fr; gap: 0; margin-bottom: 2rem; border: 2px solid var(--ink); }
+.tab-btn {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  background: transparent;
+  border: none; border-right: 1px solid var(--ink);
+  padding: 0.8rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  color: var(--warm-gray);
+}
+.tab-btn:last-child { border-right: none; }
+.tab-btn.active { background: var(--ink); color: var(--saffron); }
+
+/* ======= EDIT FLOATING BUTTON ======= */
+.edit-float {
+  display: none; position: fixed; bottom: 2rem; right: 2rem;
+  background: var(--saffron); color: var(--ink);
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.7rem; font-weight: 600;
+  letter-spacing: 0.08em; text-transform: uppercase;
+  border: none; padding: 0.8rem 1.5rem;
+  cursor: pointer; z-index: 500;
+  box-shadow: 4px 4px 0 var(--ink);
+  transition: box-shadow 0.15s, transform 0.15s;
+}
+.edit-float:hover { box-shadow: 2px 2px 0 var(--ink); transform: translate(2px,2px); }
+.edit-float.visible { display: flex; align-items: center; gap: 0.5rem; }
+
+/* ======= TOAST ======= */
+.toast {
+  position: fixed; bottom: 2rem; left: 50%;
+  transform: translateX(-50%) translateY(80px);
+  background: var(--ink); color: var(--white);
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.72rem; font-weight: 600;
+  letter-spacing: 0.08em; text-transform: uppercase;
+  padding: 0.8rem 2rem;
+  border: 2px solid var(--saffron);
+  z-index: 99999;
+  transition: transform 0.3s ease;
+}
+.toast.show { transform: translateX(-50%) translateY(0); }
+
+/* ======= FOOTER ======= */
+footer {
+  background: var(--ink);
+  border-top: 3px solid var(--saffron);
+}
+.footer-top {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 0;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+.footer-col { padding: 3rem 2.5rem; border-right: 1px solid rgba(255,255,255,0.06); }
+.footer-col:last-child { border-right: none; }
+.footer-brand-name {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 2rem;
+  color: var(--white);
+  letter-spacing: 0.05em;
+  margin-bottom: 0.5rem;
+}
+.footer-brand-name span { color: var(--saffron); }
+.footer-brand-tagline {
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+  font-size: 0.85rem;
+  color: rgba(255,255,255,0.35);
+  margin-bottom: 1.5rem;
+}
+.footer-col h4 {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.65rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--saffron);
+  margin-bottom: 1.2rem;
+}
+.footer-col a {
+  display: block;
+  font-size: 0.88rem;
+  color: rgba(255,255,255,0.4);
+  text-decoration: none;
+  margin-bottom: 0.6rem;
+  cursor: pointer;
+  transition: color 0.2s;
+  font-family: 'Lora', serif;
+}
+.footer-col a:hover { color: var(--white); }
+.footer-bottom {
+  padding: 1.5rem 2.5rem;
+  display: flex; justify-content: space-between; align-items: center;
+}
+.footer-bottom p {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.62rem;
+  letter-spacing: 0.08em;
+  color: rgba(255,255,255,0.25);
+}
+
+/* RESPONSIVE */
+@media(max-width:900px) {
+  .hero-editorial { grid-template-columns: 1fr; }
+  .hero-col-left, .hero-col-right, .hero-divider { display: none; }
+  .hero-col-mid { height: 80vw; }
+  .pillars-row { grid-template-columns: 1fr 1fr; }
+  .featured-grid { grid-template-columns: 1fr; }
+  .about-grid-2col { grid-template-columns: 1fr; }
+  .values-strip { grid-template-columns: 1fr 1fr; }
+  .team-grid-ed { grid-template-columns: 1fr 1fr; }
+  .contact-masthead { grid-template-columns: 1fr; gap:2rem; }
+  .contact-form-area { grid-template-columns: 1fr; }
+  .blogs-row-big { grid-template-columns: 1fr; }
+  .blogs-row-small { grid-template-columns: 1fr 1fr; }
+  .blog-full-hero { grid-template-columns: 1fr; }
+  .blog-full-hero-img { height: 50vw; }
+  .footer-top { grid-template-columns: 1fr 1fr; }
+  .form-row { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cur"></div>
+<div class="cursor-ring" id="ring"></div>
+<div class="toast" id="toast"></div>
+
+<!-- NAV -->
+<nav>
+  <div class="logo-text" onclick="showPage('home')">SHE<span>RISES</span></div>
+  <ul class="nav-links">
+    <li><a id="nav-home" class="active" onclick="showPage('home')">Home</a></li>
+    <li><a id="nav-about" onclick="showPage('about')">About</a></li>
+    <li><a id="nav-blogs" onclick="showPage('blogs')">Voices</a></li>
+    <li><a id="nav-contact" onclick="showPage('contact')">Connect</a></li>
+  </ul>
+  <div style="display:flex;gap:0.8rem;align-items:center;">
+    <button class="nav-admin-btn" id="adminNavBtn" onclick="openLogin()">Admin</button>
+    <button class="nav-logout-btn" id="logoutBtn" onclick="logout()">Logout</button>
+  </div>
+</nav>
+
+<!-- EDIT FLOAT -->
+<button class="edit-float" id="editFloat" onclick="openEditModal()">✎ Edit Page</button>
+
+<!-- ========================= HOME ========================= -->
+<div class="page active" id="page-home">
+  <div class="hero-editorial">
+    <div class="hero-col-left">
+      <div class="hero-issue-tag">Est. 2018 · Global Edition · Vol. 07</div>
+      <div>
+        <h1>SHE<br>RI<span class="accent">SES</span></h1>
+        <p class="hero-tagline">Where women's stories are not whispered but declared — loud, proud, and permanent.</p>
+      </div>
+      <div class="hero-stats-row">
+        <div class="hero-stat"><div class="hero-stat-num">3.4M</div><div class="hero-stat-label">Readers Monthly</div></div>
+        <div class="hero-stat"><div class="hero-stat-num">190</div><div class="hero-stat-label">Countries</div></div>
+        <div class="hero-stat"><div class="hero-stat-num">870+</div><div class="hero-stat-label">Stories Published</div></div>
+        <div class="hero-stat"><div class="hero-stat-num">15</div><div class="hero-stat-label">This Edition</div></div>
+      </div>
+    </div>
+    <div class="hero-divider"></div>
+    <div class="hero-col-mid">
+      <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=1000&auto=format&fit=crop&q=80" alt="Women rising">
+      <div class="hero-mid-overlay">
+        <p>Photography: Unsplash · SheRises Global Editorial</p>
+      </div>
+    </div>
+    <div class="hero-divider"></div>
+    <div class="hero-col-right">
+      <div></div>
+      <blockquote class="hero-right-quote">
+        "The most courageous act is still to think for yourself. Aloud."
+        <cite>— Coco Chanel</cite>
+      </blockquote>
+      <div style="display:flex;flex-direction:column;gap:0.8rem;">
+        <button class="btn-saffron" onclick="showPage('blogs')">Read This Edition →</button>
+        <button class="btn-white" onclick="showPage('about')">Our Manifesto</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- TICKER -->
+  <div class="ticker">
+    <div class="ticker-inner">
+      <span>Women Lead Nations</span><span>●</span>
+      <span>Equal Pay Now</span><span>●</span>
+      <span>Girls in Science</span><span>●</span>
+      <span>Break Every Ceiling</span><span>●</span>
+      <span>Climate Justice = Gender Justice</span><span>●</span>
+      <span>Your Body Your Choice</span><span>●</span>
+      <span>Sisterhood Is Power</span><span>●</span>
+      <span>Women Lead Nations</span><span>●</span>
+      <span>Equal Pay Now</span><span>●</span>
+      <span>Girls in Science</span><span>●</span>
+      <span>Break Every Ceiling</span><span>●</span>
+      <span>Climate Justice = Gender Justice</span><span>●</span>
+      <span>Your Body Your Choice</span><span>●</span>
+      <span>Sisterhood Is Power</span><span>●</span>
+    </div>
+  </div>
+
+  <!-- PILLARS -->
+  <div class="section-header">
+    <span class="section-number">001</span>
+    <h2 class="section-title-big">Our Four Pillars</h2>
+    <div class="section-line"></div>
+  </div>
+  <div class="pillars-row">
+    <div class="pillar-item">
+      <img src="https://images.unsplash.com/photo-1551836022-4c4c79ecde51?w=600&auto=format&fit=crop&q=80" alt="Voice">
+      <div class="pillar-overlay">
+        <div class="pillar-num">01 / Voice</div>
+        <div class="pillar-title">Speak Truth</div>
+        <div class="pillar-desc">Amplifying authentic stories from women across every culture, age, and background — unfiltered and unflinching.</div>
+      </div>
+    </div>
+    <div class="pillar-item">
+      <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=600&auto=format&fit=crop&q=80" alt="Knowledge">
+      <div class="pillar-overlay">
+        <div class="pillar-num">02 / Knowledge</div>
+        <div class="pillar-title">Learn Bold</div>
+        <div class="pillar-desc">Education, mentorship, and information access as tools of radical personal and collective transformation.</div>
+      </div>
+    </div>
+    <div class="pillar-item">
+      <img src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=600&auto=format&fit=crop&q=80" alt="Action">
+      <div class="pillar-overlay">
+        <div class="pillar-num">03 / Action</div>
+        <div class="pillar-title">Move Mountains</div>
+        <div class="pillar-desc">From boardrooms to grassroots organizing — real, tangible change driven by women who refuse the status quo.</div>
+      </div>
+    </div>
+    <div class="pillar-item">
+      <img src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=600&auto=format&fit=crop&q=80" alt="Unity">
+      <div class="pillar-overlay">
+        <div class="pillar-num">04 / Unity</div>
+        <div class="pillar-title">Rise Together</div>
+        <div class="pillar-desc">No woman left behind. Intersectional, radical solidarity across every difference that could divide us.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FEATURED -->
+  <div class="section-header">
+    <span class="section-number">002</span>
+    <h2 class="section-title-big">Featured Voices</h2>
+    <div class="section-line"></div>
+  </div>
+  <div class="featured-grid">
+    <div class="feat-main">
+      <div class="feat-label">✦ Editor's Pick · This Week</div>
+      <h2 id="home-feat-title">The Silent Revolution: How Rural Women Are Rebuilding Economies Without Anyone Noticing</h2>
+      <p id="home-feat-excerpt">In villages from Gujarat to Guatemala, women are running informal economies that sustain millions — yet remain invisible in national statistics, policy, and praise.</p>
+      <button class="btn-white" onclick="showPage('blogs')">Read the Full Story →</button>
+    </div>
+    <div class="feat-divider"></div>
+    <div class="feat-sidebar" id="home-feat-sidebar"></div>
+  </div>
+
+  <footer>
+    <div class="footer-top">
+      <div class="footer-col">
+        <div class="footer-brand-name">SHE<span>RISES</span></div>
+        <div class="footer-brand-tagline">Women's stories. Global reach. Radical honesty.</div>
+        <p style="font-size:0.82rem;color:rgba(255,255,255,0.3);line-height:1.7">A global platform dedicated to amplifying women's voices, challenging inequality, and building a world where every woman can rise on her own terms.</p>
+      </div>
+      <div class="footer-col"><h4>Navigate</h4><a onclick="showPage('home')">Home</a><a onclick="showPage('about')">About</a><a onclick="showPage('blogs')">Voices</a><a onclick="showPage('contact')">Connect</a></div>
+      <div class="footer-col"><h4>Topics</h4><a>Entrepreneurship</a><a>Wellness</a><a>Politics</a><a>Science & Tech</a><a>Arts & Culture</a></div>
+      <div class="footer-col"><h4>Follow</h4><a>Instagram</a><a>LinkedIn</a><a>Substack</a><a>Podcast</a></div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2025 SheRises Media. All rights reserved.</p>
+      <p>Made with conviction. Published with purpose.</p>
+    </div>
+  </footer>
+</div>
+
+<!-- ========================= ABOUT ========================= -->
+<div class="page" id="page-about">
+  <div class="about-banner">
+    <h1>ABOUT<br><em>our manifesto</em></h1>
+    <p>SheRises is not a magazine. It's not a blog. It's a declaration — that women's stories are not secondary, their struggles are not niche, and their power is not optional. We exist to document, celebrate, and accelerate the rise of women worldwide.</p>
+    <div style="margin-top:2rem;display:flex;gap:1rem;flex-wrap:wrap;">
+      <button class="btn-ink" onclick="showPage('contact')">Write for Us →</button>
+      <button class="btn-saffron" onclick="showPage('blogs')">Read Our Work</button>
+    </div>
+  </div>
+
+  <div class="about-grid-2col">
+    <div class="about-col">
+      <h2>How We Started</h2>
+      <p>SheRises was born in a small apartment in Nairobi in 2018, from a conversation between three women journalists who were exhausted by the way women's stories were covered — when they were covered at all. Too often, women appeared in the news as victims, as accessories to men's narratives, or as inspirational exceptions who "made it" despite all odds.</p>
+      <p>We wanted something different. A platform where women were the protagonists of their own stories. Where complexity was welcomed. Where a woman farmer in Bangladesh and a CEO in Berlin could both find themselves reflected in our pages.</p>
+      <p>Seven years later, SheRises reaches 3.4 million readers monthly across 190 countries. We publish in six languages. We have broken stories that changed policy. We have introduced the world to women who deserved global platforms. And we are just getting started.</p>
+    </div>
+    <div class="about-col">
+      <h2>What We Believe</h2>
+      <p>We believe that journalism can be feminist without losing its rigor. We believe that storytelling is one of the most powerful tools for social change. We believe that the most marginalized women — those at the intersection of multiple forms of discrimination — deserve the most amplification, not the least.</p>
+      <p>We believe that women's empowerment is not a "women's issue" — it is the central issue of our time, connected to everything from climate change to economic stability to democratic governance to global health. When women rise, humanity rises.</p>
+      <p>And we believe that the truth, told beautifully and without flinching, can change the world. That's why we write.</p>
+      <button class="btn-ink" style="margin-top:1rem" onclick="showPage('contact')">Partner With Us →</button>
+    </div>
+  </div>
+
+  <div class="values-strip">
+    <div class="value-block"><div class="value-num">01</div><h3>Radical Honesty</h3><p>We tell the truth about power, about injustice, and about what real change requires — even when it's uncomfortable.</p></div>
+    <div class="value-block"><div class="value-num">02</div><h3>Deep Intersectionality</h3><p>We center the most marginalized, not the most convenient. Race, class, disability, and sexuality are not footnotes here.</p></div>
+    <div class="value-block"><div class="value-num">03</div><h3>Global Reach</h3><p>Women's struggles and triumphs are not confined by geography. Neither are we. We report from every continent.</p></div>
+    <div class="value-block"><div class="value-num">04</div><h3>Action Over Awareness</h3><p>We are not satisfied with creating consciousness. We push for policy, practice, and permanent structural change.</p></div>
+  </div>
+
+  <div class="team-editorial">
+    <h2>The Editorial Team</h2>
+    <div class="team-grid-ed">
+      <div class="team-card-ed">
+        <img src="https://images.unsplash.com/photo-1531123897727-8f129e1688ce?w=400&auto=format&fit=crop&q=80" alt="Nadia">
+        <h4>Nadia Okonkwo</h4>
+        <div class="role">Founder & Editor-in-Chief</div>
+        <p>Former Reuters correspondent. 18 years reporting on gender, conflict, and economic justice across Africa and South Asia.</p>
+      </div>
+      <div class="team-card-ed">
+        <img src="https://images.unsplash.com/photo-1589156229687-496a31ad1d1f?w=400&auto=format&fit=crop&q=80" alt="Priya">
+        <h4>Priya Nair</h4>
+        <div class="role">Senior Editor, South Asia</div>
+        <p>Award-winning investigative journalist. Specialises in rural women's economies and agrarian policy reform.</p>
+      </div>
+      <div class="team-card-ed">
+        <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?w=400&auto=format&fit=crop&q=80" alt="Maya">
+        <h4>Maya Osei</h4>
+        <div class="role">Head of Multimedia</div>
+        <p>Documentary filmmaker and photojournalist. Her visual storytelling has been featured at international human rights festivals.</p>
+      </div>
+      <div class="team-card-ed">
+        <img src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=400&auto=format&fit=crop&q=80" alt="Zara">
+        <h4>Zara Al-Hussaini</h4>
+        <div class="role">Community & Partnerships</div>
+        <p>Built SheRises's global network of 420+ contributor journalists from underrepresented regions.</p>
+      </div>
+    </div>
+  </div>
+
+  <div style="background:var(--saffron);padding:4rem 6vw;text-align:center;">
+    <div style="font-family:'Bebas Neue',sans-serif;font-size:clamp(2rem,5vw,4rem);letter-spacing:0.05em;color:var(--ink);margin-bottom:1rem;">"When she rises, we all rise."</div>
+    <div style="font-family:'IBM Plex Mono',monospace;font-size:0.7rem;letter-spacing:0.15em;color:rgba(13,13,13,0.6);text-transform:uppercase;">— The SheRises Manifesto, 2018</div>
+  </div>
+
+  <footer>
+    <div class="footer-top">
+      <div class="footer-col"><div class="footer-brand-name">SHE<span>RISES</span></div><div class="footer-brand-tagline">Women's stories. Global reach.</div></div>
+      <div class="footer-col"><h4>Navigate</h4><a onclick="showPage('home')">Home</a><a onclick="showPage('about')">About</a><a onclick="showPage('blogs')">Voices</a><a onclick="showPage('contact')">Connect</a></div>
+      <div class="footer-col"><h4>Topics</h4><a>Entrepreneurship</a><a>Wellness</a><a>Politics</a><a>Science & Tech</a></div>
+      <div class="footer-col"><h4>Follow</h4><a>Instagram</a><a>LinkedIn</a><a>Substack</a><a>Podcast</a></div>
+    </div>
+    <div class="footer-bottom"><p>© 2025 SheRises Media.</p><p>Published with purpose.</p></div>
+  </footer>
+</div>
+
+<!-- ========================= CONTACT ========================= -->
+<div class="page" id="page-contact">
+  <div class="contact-masthead">
+    <h1>LET'S<br>TALK<br><em>together</em></h1>
+    <ul class="contact-info-list">
+      <li><span class="ci-label">Email</span><span class="ci-value">stories@sherises.org<br>partnerships@sherises.org</span></li>
+      <li><span class="ci-label">Pitch Us</span><span class="ci-value">Have a story we need to tell? We respond to all pitches within 5 working days.</span></li>
+      <li><span class="ci-label">Location</span><span class="ci-value">Nairobi · London · New York · Mumbai<br>Globally distributed editorial team</span></li>
+      <li><span class="ci-label">Social</span><span class="ci-value">@SheRisesMedia on Instagram, LinkedIn & X</span></li>
+    </ul>
+  </div>
+
+  <div class="contact-form-area">
+    <div class="contact-form-panel">
+      <h2>Send Your Message</h2>
+      <div class="form-row">
+        <div class="fg"><label>First Name</label><input type="text" placeholder="Your name"></div>
+        <div class="fg"><label>Last Name</label><input type="text" placeholder="Your surname"></div>
+      </div>
+      <div class="fg"><label>Email Address</label><input type="email" placeholder="your@email.com"></div>
+      <div class="fg"><label>Subject</label>
+        <select>
+          <option>Submit a Story Pitch</option>
+          <option>Brand Partnership</option>
+          <option>Media Inquiry</option>
+          <option>Join Our Network</option>
+          <option>Speaking / Events</option>
+          <option>General Enquiry</option>
+        </select>
+      </div>
+      <div class="fg"><label>Your Message</label><textarea placeholder="Tell us what's on your mind..."></textarea></div>
+      <button class="btn-ink" onclick="showToast('✓ Message received — we\'ll be in touch within 48 hours.')">Send Message →</button>
+    </div>
+    <div class="contact-sidebar-panel">
+      <h3>Why Write for SheRises?</h3>
+      <div class="contact-img-block">
+        <img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=600&auto=format&fit=crop&q=80" alt="Writing">
+        <p>Join a global community of 420+ women journalists, writers, and activists shaping the conversation.</p>
+      </div>
+      <div style="border-top:1px solid var(--line);padding-top:1.5rem;">
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:0.62rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--teal);margin-bottom:0.8rem;">What We're Looking For</div>
+        <ul style="list-style:none;font-size:0.85rem;color:#444;line-height:1.9;">
+          <li>→ First-person narrative journalism</li>
+          <li>→ Policy analysis with human impact</li>
+          <li>→ Profiles of unsung women leaders</li>
+          <li>→ Data-driven investigative pieces</li>
+          <li>→ Cultural criticism & arts commentary</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="footer-top">
+      <div class="footer-col"><div class="footer-brand-name">SHE<span>RISES</span></div><div class="footer-brand-tagline">Women's stories. Global reach.</div></div>
+      <div class="footer-col"><h4>Navigate</h4><a onclick="showPage('home')">Home</a><a onclick="showPage('about')">About</a><a onclick="showPage('blogs')">Voices</a><a onclick="showPage('contact')">Connect</a></div>
+      <div class="footer-col"><h4>Topics</h4><a>Entrepreneurship</a><a>Wellness</a><a>Politics</a><a>Science & Tech</a></div>
+      <div class="footer-col"><h4>Follow</h4><a>Instagram</a><a>LinkedIn</a><a>Substack</a></div>
+    </div>
+    <div class="footer-bottom"><p>© 2025 SheRises Media.</p><p>Published with purpose.</p></div>
+  </footer>
+</div>
+
+<!-- ========================= BLOGS ========================= -->
+<div class="page" id="page-blogs">
+  <div class="blogs-masthead">
+    <h1>VOICES<span>15 Stories That Matter</span></h1>
+    <div class="blogs-masthead-right">
+      <div class="blog-count" id="blogCount">Showing 15 of 15 stories</div>
+      <button class="add-blog-btn" id="addBlogBtn" onclick="openAddBlog()">+ New Story</button>
+    </div>
+  </div>
+  <div class="blogs-filter-bar">
+    <button class="fbtn active" onclick="filterBlogs('all',this)">All</button>
+    <button class="fbtn" onclick="filterBlogs('Entrepreneurship',this)">Entrepreneurship</button>
+    <button class="fbtn" onclick="filterBlogs('Wellness',this)">Wellness</button>
+    <button class="fbtn" onclick="filterBlogs('Politics',this)">Politics</button>
+    <button class="fbtn" onclick="filterBlogs('Science',this)">Science & Tech</button>
+    <button class="fbtn" onclick="filterBlogs('Arts',this)">Arts & Culture</button>
+    <button class="fbtn" onclick="filterBlogs('Education',this)">Education</button>
+    <button class="fbtn" onclick="filterBlogs('Environment',this)">Environment</button>
+  </div>
+  <div class="blogs-newspaper" id="blogsNewspaper"></div>
+</div>
+
+<!-- ========================= BLOG FULL VIEW ========================= -->
+<div id="blog-full-view">
+  <button class="back-btn" onclick="closeBlogView()">← Back to All Voices</button>
+  <div id="blog-full-content"></div>
+</div>
+
+<!-- ========================= LOGIN OVERLAY ========================= -->
+<div class="overlay" id="loginOverlay">
+  <div class="modal">
+    <button class="modal-close" onclick="closeLogin()">✕ Close</button>
+    <h2>Admin Login</h2>
+    <p class="sub">Enter your credentials to manage SheRises content</p>
+    <div class="fg"><label>Username</label><input type="text" id="loginUser" placeholder="admin"></div>
+    <div class="fg"><label>Password</label><input type="password" id="loginPass" placeholder="••••••••" onkeypress="if(event.key==='Enter')doLogin()"></div>
+    <button class="btn-ink" style="width:100%;margin-top:1rem" onclick="doLogin()">Login →</button>
+    <p style="font-size:0.72rem;color:var(--warm-gray);margin-top:1rem;font-family:'IBM Plex Mono',monospace">Credentials: admin / sherises2025</p>
+  </div>
+</div>
+
+<!-- ========================= ADD BLOG OVERLAY ========================= -->
+<div class="overlay" id="addBlogOverlay">
+  <div class="modal wide">
+    <button class="modal-close" onclick="closeAddBlog()">✕ Close</button>
+    <h2>Publish New Story</h2>
+    <p class="sub">Choose your format and share your voice with the world</p>
+    <div class="tab-row">
+      <button class="tab-btn active" onclick="switchTab('text',this)">✍ Write Text</button>
+      <button class="tab-btn" onclick="switchTab('code',this)">{ } HTML Code</button>
+    </div>
+    <div id="tab-text">
+      <div class="fg"><label>Story Title *</label><input type="text" id="nt-title" placeholder="A title that demands to be read..."></div>
+      <div class="form-row">
+        <div class="fg"><label>Category</label><select id="nt-cat"><option>Entrepreneurship</option><option>Wellness</option><option>Politics</option><option>Science</option><option>Arts</option><option>Education</option><option>Environment</option></select></div>
+        <div class="fg"><label>Author</label><input type="text" id="nt-author" placeholder="Your name"></div>
+      </div>
+      <div class="fg"><label>Cover Image URL (Unsplash recommended)</label><input type="text" id="nt-img" placeholder="https://images.unsplash.com/..."></div>
+      <div class="fg"><label>Excerpt (2–3 compelling sentences)</label><textarea id="nt-excerpt" style="min-height:70px" placeholder="Hook your readers..."></textarea></div>
+      <div class="fg"><label>Full Article *</label><textarea id="nt-content" style="min-height:220px" placeholder="Write your full story here. Separate paragraphs with blank lines..."></textarea></div>
+    </div>
+    <div id="tab-code" style="display:none">
+      <div class="fg"><label>Story Title *</label><input type="text" id="nc-title" placeholder="Story title..."></div>
+      <div class="form-row">
+        <div class="fg"><label>Category</label><select id="nc-cat"><option>Entrepreneurship</option><option>Wellness</option><option>Politics</option><option>Science</option><option>Arts</option><option>Education</option><option>Environment</option></select></div>
+        <div class="fg"><label>Author</label><input type="text" id="nc-author" placeholder="Author name"></div>
+      </div>
+      <div class="fg"><label>Cover Image URL</label><input type="text" id="nc-img" placeholder="https://..."></div>
+      <div class="fg"><label>HTML Content *</label><textarea id="nc-code" style="min-height:280px;font-family:'IBM Plex Mono',monospace;font-size:0.82rem" placeholder="&lt;h2&gt;Section Title&lt;/h2&gt;&#10;&lt;p&gt;Your content...&lt;/p&gt;"></textarea></div>
+    </div>
+    <button class="btn-saffron" style="width:100%;margin-top:1.5rem" onclick="publishStory()">Publish Story →</button>
+  </div>
+</div>
+
+<!-- ========================= EDIT OVERLAY ========================= -->
+<div class="overlay" id="editOverlay">
+  <div class="modal wide">
+    <button class="modal-close" onclick="closeEditModal()">✕ Close</button>
+    <h2>Edit Content</h2>
+    <p class="sub">Modify the fields below and save your changes</p>
+    <div id="editModalContent"></div>
+    <button class="btn-ink" style="margin-top:1.5rem" onclick="saveEdit()">Save Changes →</button>
+  </div>
+</div>
+
+<script>
+// ============= CURSOR =============
+const cur = document.getElementById('cur');
+const ring = document.getElementById('ring');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cur.style.left=mx+'px';cur.style.top=my+'px';});
+(function animRing(){rx+=(mx-rx)*0.12;ry+=(my-ry)*0.12;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(animRing);})();
+document.querySelectorAll('a,button,input,textarea,select').forEach(el=>{
+  el.addEventListener('mouseenter',()=>{cur.style.width='20px';cur.style.height='20px';cur.style.background='var(--teal)';});
+  el.addEventListener('mouseleave',()=>{cur.style.width='12px';cur.style.height='12px';cur.style.background='var(--saffron)';});
+});
+
+// ============= BLOG DATA =============
+const blogs = [
+{
+  id:1,title:"The Silent Revolution: How Rural Women Are Rebuilding Economies Without Anyone Noticing",
+  category:"Entrepreneurship",author:"Priya Nair",date:"June 3, 2025",
+  img:"https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=900&auto=format&fit=crop&q=80",
+  excerpt:"In villages from Gujarat to Guatemala, women are running informal economies that sustain millions — yet remain invisible in national statistics, policy, and praise.",
+  content:`<p>Walk through any rural market in South Asia at dawn and you will see them. Women — dozens, sometimes hundreds — setting up stalls, exchanging goods, managing credit, and negotiating prices with a precision and speed that would impress any MBA graduate. These women are running businesses. They are creating supply chains. They are the beating heart of local economies. And for the most part, no one counts them.</p><img class="inline-img" src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=800&auto=format&fit=crop&q=80" alt="Rural women market"><h2>The Invisible Economy</h2><p>The informal economy — the world of unregistered, untaxed, uncounted economic activity — accounts for more than 60% of global employment, according to the International Labour Organization. And within that vast invisible economy, women are disproportionately represented. They sell produce, provide childcare, weave textiles, prepare food, offer traditional medicine, and provide a thousand other services that keep communities functioning. None of it appears in GDP figures. Few of these women appear in economic policy discussions.</p><p>This is not accidental. The formal economy was designed with a particular actor in mind: the male property owner with a fixed address, a bank account, and a stable employment history. Women in the informal economy often have none of these things. They may not own land. They may not have national identity documents. They may lack access to banking. And so the formal financial system, the legal system, and the policy system all treat them as if they do not exist — even as those same systems depend on the economic activity those women generate.</p><h2>What They're Actually Building</h2><p>In Gujarat's Kutch district, the Self Employed Women's Association (SEWA) has spent 50 years documenting and supporting exactly this kind of invisible economic power. SEWA has helped more than 1.7 million women — most of them illiterate, most of them from historically marginalized castes — gain access to banking, insurance, childcare, and legal protection. What SEWA's research consistently finds is that these women are not just surviving. They are building. They are saving, investing, lending to each other, and creating the kind of intergenerational wealth transfer that formal economists associate only with the middle class.</p><p>In Guatemala's highlands, the Mayan weaving cooperatives have turned traditional textile production into a global export business, with women controlling the supply chain from raw material sourcing to direct-to-consumer online sales. In Rwanda, women's farming cooperatives are using mobile banking to access credit at rates that would have been unimaginable a decade ago. In Nigeria, market women's associations function as de facto banks and insurance pools, providing financial services to communities that commercial banks refuse to serve.</p><h2>Why They Stay Invisible</h2><p>The invisibility of women's informal economic activity is not simply a measurement problem. It is a political problem. Recognizing these women's economic contributions would require recognizing their economic rights — to land, to credit, to contracts, to legal protection from exploitation. In many contexts, powerful interests benefit from keeping women in an economic gray zone where they can be taxed informally by local authorities, exploited by middlemen, and excluded from policy benefits without political consequence.</p><p>Additionally, the metrics we use to measure economic activity were largely developed by men in the mid-20th century to track the kind of economic activity that men primarily engaged in: formal wage employment and large-scale industrial production. Care work, subsistence agriculture, artisanal production, and community economic exchange — all domains where women's labor is concentrated — were explicitly excluded from GDP calculations. This was a choice, not a technical necessity, and it was a choice with profound political and policy consequences.</p><h2>What Changes When We See Them</h2><p>When policy makers, investors, and development organizations actually look at what rural women are building, remarkable things happen. Microfinance programs that target women consistently show higher repayment rates and more sustainable enterprise development than those targeting men. Cash transfer programs that route money through women rather than men show dramatically better outcomes for children's health and education. Agricultural development programs that provide women farmers with the same resources as men could feed 150 million more people annually, according to the UN FAO.</p><p>The evidence is unambiguous: investing in women's economic activity is one of the highest-return development interventions available. What is missing is not the evidence but the political will to design systems that see and serve these women — rather than systems that continue to rely on their labor while denying their visibility.</p>`,
+  faqs:[{q:"What is the informal economy?",a:"The informal economy consists of economic activities that are not regulated, taxed, or officially monitored by the government. It includes street trading, subsistence farming, domestic work, and traditional craft production. It employs over 60% of the global workforce, with women disproportionately represented."},{q:"What is SEWA and what has it achieved?",a:"SEWA — the Self Employed Women's Association — is a trade union based in India that represents over 1.7 million informal women workers. Founded in 1972, it has pioneered models for providing banking, insurance, healthcare, and childcare to women in the informal economy."},{q:"Why is women's economic activity undercounted in GDP?",a:"GDP was designed in the mid-20th century primarily to measure formal wage employment and industrial production. Care work, subsistence agriculture, and informal trade — areas dominated by women's labor — were deliberately excluded from the calculation."},{q:"What is the evidence that investing in women generates better returns?",a:"Studies show women reinvest up to 90% of their income in their families (compared to 35% for men), microfinance to women shows higher repayment rates, and agricultural programs targeting women could feed 150 million additional people per year."},{q:"How can policy makers better support women in the informal economy?",a:"Key interventions include providing women with legal identity documents and land rights, designing financial products for informal workers, counting women's economic activity in national statistics, extending labor protections to informal workers, and routing development funding through women's organizations."}]
+},
+{
+  id:2,title:"Grief, Grace, and the Gym: How Women Are Using Fitness to Reclaim Their Bodies",
+  category:"Wellness",author:"Maya Osei",date:"June 10, 2025",
+  img:"https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=900&auto=format&fit=crop&q=80",
+  excerpt:"A new generation of women is discovering that exercise is not about punishment or aesthetics — it's about sovereignty, community, and the radical act of feeling at home in your own skin.",
+  content:`<p>For most of her twenties, Adaeze ran. Not because she loved it — she didn't — but because she'd been told by every fitness magazine, every well-meaning relative, and the silent arithmetic of diet culture that her body was a problem requiring a solution. She logged kilometers like debts being paid. Then, at 29, she stopped entirely. And in that stopping, she found something unexpected: herself.</p><img class="inline-img" src="https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=800&auto=format&fit=crop&q=80" alt="Women fitness community"><h2>The Old Story</h2><p>Women's relationships with their bodies have been mediated, for generations, through a lens of inadequacy. The fitness industry — a $100 billion global enterprise — has historically sold women a single product disguised as many: the promise that if they exercise correctly, restrict cleverly, and discipline rigorously, they will eventually achieve the body that earns them social acceptance, romantic attention, and personal worth. This is a story as old as corsets and as fresh as the latest Instagram detox influencer. It is also, demonstrably, a story that makes women miserable.</p><p>The research on weight-focused fitness culture is damning. Studies consistently show that exercising primarily for appearance-based goals correlates with lower long-term adherence, higher rates of body dissatisfaction, and worse mental health outcomes than exercising for enjoyment, health, or strength-based goals. The punitive approach to fitness — exercise as penance for eating, movement as obligation rather than joy — does not produce healthy women. It produces women who are perpetually at war with themselves.</p><h2>A Different Movement</h2><p>Something is shifting. Partly driven by the body positivity movement, partly by the growing influence of sports medicine and health psychology, and significantly by women sharing their experiences online and in community spaces, a different relationship with fitness is emerging. One grounded not in punishment or aesthetics but in strength, capability, joy, and the profound experience of discovering what your body can actually do.</p><p>The rise of powerlifting among women is one of the clearest expressions of this shift. Powerlifting — which measures strength through three lifts: squat, bench press, and deadlift — has seen dramatic increases in women's participation over the past decade. What draws women to it, coaches and participants consistently say, is the simplicity of the metric: not how you look, but how much you can lift. For women who have spent their lives being evaluated on appearance, this shift in focus is genuinely liberating. When a woman deadlifts twice her body weight, she is not thinking about her thighs. She is thinking about her power.</p><h2>Community as Catalyst</h2><p>Equally significant is the way women are reimagining fitness as a collective rather than individual practice. Women's running clubs, feminist yoga studios, postpartum fitness communities, and adaptive sports programs for women with disabilities are all building something that goes far beyond physical conditioning. They are building communities of care, accountability, and shared experience in a culture that frequently isolates women from each other.</p><p>Research on group exercise consistently shows social connection as a primary driver of long-term adherence. When a woman's workout is also her community — when missing the Saturday run means missing her people — the motivation becomes intrinsic rather than disciplinary. This is a fundamentally different relationship with movement than the solitary, guilt-driven treadmill session of diet culture fitness.</p><h2>Fitness After Trauma</h2><p>For many women, the path to a healthy relationship with movement runs through the territory of trauma. Survivors of abuse, illness, and difficult pregnancies often have complicated histories with their bodies — histories in which control was taken from them and the body itself became a site of fear or shame. Trauma-informed fitness practices — which center consent, choice, breath, and bodily autonomy — are being developed by somatic therapists, yoga teachers, and movement educators to support these women in rebuilding trust with their own physical experience.</p><p>The framing matters enormously. "What can my body do?" is a different question from "What does my body look like?" And "How does movement make me feel?" is a different question from "How many calories does this burn?" These shifts in framing are not trivial — they represent a fundamental reclamation of the relationship between women and their bodies.</p>`,
+  faqs:[{q:"What is diet culture and how does it affect women's fitness?",a:"Diet culture is the belief system that equates thinness with health and moral virtue, and promotes restriction and punishment-based exercise as the path to an acceptable body. It drives disordered eating, exercise compulsion, and chronic body dissatisfaction in women."},{q:"Why is powerlifting growing so fast among women?",a:"Powerlifting offers women a strength-based, performance-focused relationship with fitness that sidesteps appearance-based evaluation. The clarity of the metric — how much weight you can lift — is liberating for women conditioned to evaluate themselves primarily through how they look."},{q:"What is trauma-informed fitness?",a:"Trauma-informed fitness practices adapt movement instruction to center consent, choice, and bodily autonomy, recognizing that many people — particularly women — have trauma histories that affect their relationship with their bodies. It emphasizes safety, breathing, and reconnection over performance."},{q:"What does research say about motivation for long-term exercise adherence?",a:"Research shows that intrinsic motivation — exercising for enjoyment, community, strength, and feeling good — produces far better long-term adherence than extrinsic motivation like appearance goals or guilt. Women who find movement communities show particularly high adherence rates."},{q:"How can women start building a healthier relationship with fitness?",a:"Start by asking 'how does this make me feel?' rather than 'how does this make me look?' Choose movement you genuinely enjoy. Find community. Work with a trainer or program that emphasizes strength and capability over aesthetics. Consider counseling if your relationship with food or movement feels compulsive or punitive."}]
+},
+{
+  id:3,title:"She Voted First: The Unsung Women Who Built the Suffragette Movement",
+  category:"Politics",author:"Nadia Okonkwo",date:"June 17, 2025",
+  img:"https://images.unsplash.com/photo-1532629345422-7515f3d16bb6?w=900&auto=format&fit=crop&q=80",
+  excerpt:"History remembers a few famous names. It forgets the thousands of women — working class, Black, immigrant — who built the suffragette movement from the ground up, often at tremendous personal cost.",
+  content:`<p>The history of women's suffrage, as commonly told, is a story of remarkable individual women: Susan B. Anthony, Emmeline Pankhurst, Elizabeth Cady Stanton. These women were remarkable. But the movement they are credited with leading was built by thousands of women whose names never made the history books — women who marched, organized, petitioned, went to prison, and sacrificed careers and family relationships for a cause that ultimately benefited everyone who came after them, including those who don't know their names.</p><img class="inline-img" src="https://images.unsplash.com/photo-1591779051696-1c3fa1469a79?w=800&auto=format&fit=crop&q=80" alt="Women's rights history"><h2>Who Built the Movement</h2><p>The grassroots infrastructure of the suffragette movement was built primarily by working-class women and women of color, whose contributions have been systematically erased from the canonical narrative. The Triangle Shirtwaist Factory fire of 1911 — in which 146 garment workers, mostly young immigrant women, died because exit doors were locked — radicalized an entire generation of working-class women and helped fuse the labor movement with the suffrage movement in ways that shaped both. The women who organized in response to that fire were not wealthy activists with leisure time for political philosophy. They were workers fighting for the right to survive.</p><p>Similarly, Black women's contribution to the suffrage movement is a story of persistence in the face of double exclusion. The mainstream suffragette movement was frequently and shamefully racist — white suffragists including some of its most celebrated leaders actively excluded Black women, argued against Black women's participation, and accepted segregation of their marches as the price of Southern white women's support. Black women like Ida B. Wells, Mary Church Terrell, and the members of the National Association of Colored Women fought for suffrage anyway — organizing in their own communities, publishing their own newspapers, and building their own political infrastructure, all while being systematically marginalized by the white women whose movement they were advancing.</p><h2>The Price They Paid</h2><p>Suffragette activism was not a safe hobby. Women who marched, picketed, and refused to be silent faced concrete personal consequences. They were arrested. They were force-fed during hunger strikes in prison. They were fired from their jobs. They were estranged from families who considered their activism an embarrassment. Emily Wilding Davison died when she stepped in front of the King's horse at the 1913 Epsom Derby — whether intentionally or accidentally is debated, but her willingness to place her body in the way of power was unambiguous.</p><p>In the United States, the suffragettes who picketed the White House during World War I — the "Silent Sentinels" — were arrested, imprisoned, and beaten in the Occoquan Workhouse in a night that became known as the "Night of Terror." These women were tortured for holding signs outside the President's house. The violence of the state's response to their peaceful protest is a measure of how seriously those in power took the threat that women's suffrage represented to the existing order.</p><h2>What Suffrage Did and Didn't Accomplish</h2><p>Women's suffrage was a landmark achievement and, in the United States, an incomplete one. The 19th Amendment, passed in 1920, gave white women the vote. Black women — and Black men — in most of the South continued to be effectively disenfranchised by poll taxes, literacy tests, and racial terror until the Voting Rights Act of 1965. For Native American women, full voting rights came even later, with some states denying them until court challenges in the 1960s and beyond. The story of women's suffrage cannot be told honestly without acknowledging that "women's suffrage" as achieved in 1920 was, in practice, white women's suffrage.</p><p>This history matters not as an exercise in guilt but as a guide to present action. The same coalition-building, the same grassroots organizing, and the same willingness to center the most marginalized rather than the most convenient are required today for the causes that remain unfinished: reproductive rights, equal pay, representation in leadership, and the elimination of gender-based violence.</p>`,
+  faqs:[{q:"Who were the 'Silent Sentinels'?",a:"The Silent Sentinels were American suffragists who picketed the White House daily from January 1917 through June 1919, holding banners addressing President Wilson. They were the first group to picket the White House. Many were arrested and imprisoned at the Occoquan Workhouse, where they were subjected to brutal treatment during the 'Night of Terror' in November 1917."},{q:"Why were Black women excluded from the mainstream suffragette movement?",a:"The mainstream suffrage movement, dominated by white women, frequently accepted racial segregation as a political strategy to avoid alienating Southern white women and to prioritize their own enfranchisement. Black women like Ida B. Wells were explicitly asked not to march alongside white suffragists in some parades."},{q:"When did all American women fully gain the right to vote?",a:"The 19th Amendment (1920) gave white women the right to vote. Black women were effectively disenfranchised in the South until the Voting Rights Act of 1965. Native American women gained citizenship (and thus voting rights) in 1924, but individual states denied voting rights through various mechanisms until court challenges in the mid-20th century."},{q:"What was the Triangle Shirtwaist Factory fire?",a:"On March 25, 1911, a fire at the Triangle Shirtwaist Factory in New York City killed 146 garment workers, mostly young immigrant Jewish and Italian women. Exit doors were locked by owners to prevent theft and unauthorized breaks. The disaster galvanized labor and suffrage organizing and led to major workplace safety reforms."},{q:"Who is Ida B. Wells and what was her role in suffrage?",a:"Ida B. Wells was a Black investigative journalist, suffragist, and civil rights activist. She documented lynching in the American South, founded anti-lynching organizations, and fought for Black women's full inclusion in the suffrage movement despite systematic exclusion by white suffrage leaders. She co-founded the National Association of Colored Women in 1896."}]
+},
+{
+  id:4,title:"Decoding the Algorithm: Why AI Keeps Getting Women Wrong",
+  category:"Science",author:"Zara Al-Hussaini",date:"June 24, 2025",
+  img:"https://images.unsplash.com/photo-1573164713714-d95e436ab8d6?w=900&auto=format&fit=crop&q=80",
+  excerpt:"Artificial intelligence is making decisions about women's jobs, loans, medical care, and legal outcomes. And it keeps making the wrong ones. Here's why — and who's responsible.",
+  content:`<p>In 2018, Amazon scrapped an AI recruiting tool after discovering it was systematically downgrading CVs that included the word "women" — as in "women's chess club" — and upgrading applications from candidates who used language patterns associated with male applicants. The system had been trained on Amazon's own hiring history, which, like most tech company hiring histories, was predominantly male. The AI had simply learned to replicate existing bias at scale, with algorithmic efficiency.</p><img class="inline-img" src="https://images.unsplash.com/photo-1551434678-e076c223a692?w=800&auto=format&fit=crop&q=80" alt="Women and AI technology"><h2>Bias at Scale</h2><p>The Amazon case is not an isolated incident. It is a pattern. Facial recognition systems misidentify darker-skinned women at dramatically higher error rates than lighter-skinned men — in some systems, the gap is as large as 35 percentage points. Credit scoring algorithms systematically offer women lower credit limits than men with equivalent financial profiles — a finding documented by regulators in multiple countries. Natural language processing systems trained on internet text replicate and amplify the gender stereotypes embedded in that text, associating women with domestic roles and men with professional ones. Healthcare AI systems trained primarily on male patient data underperform for women across a range of conditions.</p><p>This is the paradox of AI bias: systems that are presented as objective and scientific are actually reflecting and amplifying the subjectivities and inequalities of the human data they were trained on. Garbage in, garbage out — except the garbage is centuries of gender discrimination, and the output is being used to make decisions about women's lives at unprecedented scale and speed.</p><h2>The Healthcare Emergency</h2><p>In medicine, the consequences of AI bias can be literally fatal. For decades, clinical research trials underrepresented women — particularly women of color — resulting in medical devices, drug dosages, and diagnostic criteria calibrated for male physiology. Wearable health devices tested primarily on men's wrists detect heart irregularities less accurately on women's typically smaller, differently shaped wrists. Dermatology AI trained on predominantly light-skinned patients misses skin cancer in darker-skinned patients at significantly higher rates. Cardiology AI trained primarily on male patient data underestimates heart disease risk in women.</p><p>The result is a healthcare system in which AI-assisted diagnosis — increasingly deployed in resource-constrained environments as an efficiency measure — systematically disadvantages women at exactly the moments when accuracy matters most. This is not a distant risk. It is already happening, in hospitals around the world.</p><h2>Who Is Responsible?</h2><p>The question of responsibility for AI bias is deliberately obscured by a framing that presents AI systems as neutral technical tools. They are not. Every AI system reflects choices — about what data to collect, what outcomes to optimize for, who to test the system on, and who gets to decide when the system is accurate enough to deploy. These choices are made by people, and those people are overwhelmingly male, overwhelmingly white, and overwhelmingly concentrated in a handful of technology companies and research institutions in the United States.</p><p>This concentration of power is not incidental. It is the mechanism by which bias is systematically embedded in the technical infrastructure of the 21st century. When the people building AI systems do not include people who will be harmed by those systems' biases, there is no internal feedback mechanism to catch and correct the bias before deployment. The solution is not better algorithms — it is diverse, inclusive teams with the authority and mandate to identify and fix bias before systems reach the real world.</p><h2>Women Fixing AI</h2><p>There are women working on exactly this problem. Organizations like the Algorithmic Justice League, founded by Joy Buolamwini after she discovered that facial recognition systems failed to detect her dark-skinned face, are conducting research, building policy advocacy, and creating public accountability for AI bias. Women researchers at universities and AI companies are developing fairness metrics, bias auditing tools, and governance frameworks that could transform how AI systems are evaluated before deployment.</p><p>But individual researchers and advocacy organizations cannot substitute for systemic change. What is needed is regulation — mandatory bias audits, transparency requirements, and liability frameworks that make AI developers financially and legally responsible for the discriminatory impacts of their systems. Several jurisdictions, including the European Union, are moving in this direction. The question is whether regulation will come fast enough to prevent the embedding of AI-mediated discrimination in the permanent infrastructure of decision-making.</p>`,
+  faqs:[{q:"What is AI bias and how does it affect women?",a:"AI bias occurs when artificial intelligence systems produce systematically different outcomes for different groups due to biases in training data, system design, or optimization objectives. For women, this manifests in lower credit offers, worse medical diagnosis, biased hiring screening, and inaccurate facial recognition — often intersecting with racial bias to most severely affect women of color."},{q:"What was the Amazon AI recruiting scandal?",a:"In 2018, Amazon discovered its AI-powered recruiting tool was systematically downgrading applications containing women-associated language and upranking applications matching patterns of historically successful (predominantly male) hires. Amazon scrapped the tool after discovering it could not be corrected. The incident revealed how training on biased historical data creates AI systems that replicate and amplify existing discrimination."},{q:"How does AI bias affect women's healthcare?",a:"Healthcare AI trained predominantly on male patient data makes less accurate diagnoses and risk assessments for women. This affects cardiac risk screening, skin cancer detection, drug dosage recommendations, and wearable device accuracy. Women of color face compounded bias, with systems trained primarily on lighter-skinned patients showing significantly higher error rates."},{q:"Who is Joy Buolamwini?",a:"Joy Buolamwini is a Ghanaian-American researcher, poet of code, and founder of the Algorithmic Justice League. Her research documented that commercial facial recognition systems had error rates up to 35% higher for dark-skinned women than lighter-skinned men. Her TED talk and research have been pivotal in driving policy conversations about AI accountability."},{q:"What regulations exist to address AI bias?",a:"The EU's AI Act (coming into force 2024–2026) establishes risk categories and mandatory requirements for high-risk AI systems. The US has issued executive guidance on AI fairness. Several jurisdictions require algorithmic impact assessments for government AI use. However, comprehensive mandatory bias auditing and liability frameworks remain limited globally."}]
+},
+{
+  id:5,title:"The Midwife Revolution: Reclaiming Birth as a Women's Domain",
+  category:"Wellness",author:"Maya Osei",date:"July 1, 2025",
+  img:"https://images.unsplash.com/photo-1516627145497-ae6968895b74?w=900&auto=format&fit=crop&q=80",
+  excerpt:"Birth used to be attended by women, managed by women, and understood by women. Then medicine took over. A global movement is restoring what was lost — with remarkable results for mothers and babies.",
+  content:`<p>For most of human history, birth was women's work. Midwives — women with deep experiential knowledge of labour, delivery, and postpartum care — attended births in homes, in communities, and in the confidence that they were the appropriate experts. Then, over the course of the 19th and 20th centuries in most Western countries, birth was medicalized, hospitalized, and systematically transferred from the domain of midwives to the domain of male obstetricians. The consequences — for maternal health, for birth experiences, and for women's autonomy over their own bodies — have been profound and mixed.</p><img class="inline-img" src="https://images.unsplash.com/photo-1476703993599-0035a21b17a9?w=800&auto=format&fit=crop&q=80" alt="Maternal care women"><h2>What Was Lost</h2><p>The medicalization of birth brought genuine benefits: sterile environments, emergency surgical capacity, neonatal intensive care, and treatments for complications that had historically killed mothers and babies. These advances are real and significant. But medicalization also brought something less welcome: the reduction of birth to a medical procedure rather than a physiological and deeply personal experience, and the systematic removal of women's agency from one of the most significant events of their lives.</p><p>Contemporary obstetric practice in many countries is characterized by high rates of interventions — induction, electronic fetal monitoring, episiotomy, caesarean section — many of which are applied routinely rather than selectively, in patterns that do not correlate with improved outcomes for low-risk pregnancies. The United States has one of the highest caesarean section rates in the world and also one of the highest maternal mortality rates among high-income countries, suggesting that more medical intervention is not synonymous with better maternal outcomes. The opposite may in fact be true for many women.</p><h2>The Evidence for Midwifery-Led Care</h2><p>A landmark systematic review published in the Lancet found that midwifery-led continuity of care — where a woman is cared for by the same midwife or small team throughout pregnancy, labour, and the postpartum period — is associated with significantly better outcomes across multiple measures. Women receiving midwifery-led care have lower rates of preterm birth, lower rates of medical intervention, higher rates of spontaneous vaginal birth, and higher rates of satisfaction with their birth experience. They are also more likely to initiate breastfeeding and more likely to feel in control during labour.</p><p>These findings are particularly significant for Black women, who in many countries die from pregnancy-related complications at dramatically higher rates than white women regardless of socioeconomic status. Research increasingly suggests that the systemic racism in healthcare — providers who dismiss Black women's pain, who fail to take their symptoms seriously, who apply obstetric interventions at higher rates without clinical justification — is a significant driver of this mortality gap. Continuity of care with a trusted, culturally competent midwife represents one of the most evidence-supported interventions available to reduce this disparity.</p><h2>The Global Picture</h2><p>In the Netherlands, approximately 30% of births take place at home, attended by midwives, with strong safety outcomes. In the United Kingdom, government guidelines recommend that all low-risk women be offered midwifery-led care, including home birth as an option. In contrast, in the United States, midwives attend only about 10% of births, home birth is unavailable or legally restricted in many states, and certified nurse-midwives have limited hospital privileges in many healthcare systems.</p><p>In the global south, the picture is different again. In many low-income countries, skilled birth attendance — by midwives, nurses, or doctors — remains the key intervention needed to prevent maternal mortality. In these contexts, the goal is not demedicalizing birth but expanding access to skilled attendance in community settings. Community midwives, trained and equipped to identify and manage complications while supporting physiological birth, represent the optimal model for most of the world's pregnant women.</p>`,
+  faqs:[{q:"What is the difference between a midwife and an obstetrician?",a:"A midwife specializes in normal physiological birth and the care of healthy pregnant women. An obstetrician is a medical doctor specializing in pregnancy complications, high-risk obstetrics, and surgical birth. In many healthcare systems, these roles complement each other, with midwives leading care for low-risk pregnancies and obstetricians providing specialist consultation for complications."},{q:"What does the evidence say about midwifery-led care outcomes?",a:"A landmark Lancet systematic review of midwifery-led continuity of care found it associated with lower rates of preterm birth and medical intervention, higher rates of spontaneous vaginal birth, higher maternal satisfaction, and greater likelihood of breastfeeding initiation compared to other models of maternity care."},{q:"Why do Black women face higher maternal mortality rates?",a:"Black women in the US die from pregnancy-related complications at 2-3 times the rate of white women regardless of income or education. Research points to systemic racism in healthcare — providers dismissing Black women's symptoms and pain, differential application of interventions, and the physiological effects of chronic stress from racism — as major contributing factors."},{q:"Is home birth safe?",a:"For low-risk pregnancies with a qualified midwife and a clear transfer plan to hospital if needed, research shows home birth outcomes are comparable to hospital birth for experienced mothers in many European countries. For first-time mothers or those with risk factors, hospital or birth centre settings provide additional safety nets. Context, preparation, and provider experience all matter significantly."},{q:"How can women advocate for better birth experiences?",a:"Women can choose care providers who support informed consent and shared decision-making, write birth preferences, hire doulas for labour support, ask about their hospital's intervention rates, understand their legal right to decline procedures, and access organizations like Birthrights (UK) or Childbirth Connection (US) for information on their rights."}]
+},
+{
+  id:6,title:"Painting the World: Women Artists Whose Work Changed Everything",
+  category:"Arts",author:"Maya Osei",date:"July 8, 2025",
+  img:"https://images.unsplash.com/photo-1514862740564-a9af11ccf2c6?w=900&auto=format&fit=crop&q=80",
+  excerpt:"For centuries, art history kept women out of the frame — literally and figuratively. A reckoning is underway, and the artists being rediscovered are reshaping what we understand about modernism, abstraction, and the politics of vision.",
+  content:`<p>In 1989, the Guerrilla Girls — a collective of feminist artists who adopted the names of dead women artists as pseudonyms and wore gorilla masks to protect their identities — posted a series of posters on New York City walls. One asked: "Do women have to be naked to get into the Met. Museum?" The accompanying statistics: women comprised less than 5% of artists represented in the museum's modern art sections but over 85% of the nudes. Thirty-five years later, the numbers have improved modestly. The fundamental question has not changed.</p><img class="inline-img" src="https://images.unsplash.com/photo-1534447677768-be436bb09401?w=800&auto=format&fit=crop&q=80" alt="Women artists gallery"><h2>The Architecture of Exclusion</h2><p>The exclusion of women from the canon of art history was not accidental — it was architectural. The institutions of art — the academies, the galleries, the critics, the collectors, and the historical narrative — were all controlled by men who determined whose work was serious, whose was decorative, and whose was worth preserving and teaching. Women were excluded from the major European academies until the late 19th century. They were denied access to life drawing classes because the nude models were male. They were relegated to "minor" genres like still life and portraiture while history painting — considered the highest form — remained a male preserve.</p><p>When women artists did succeed despite these constraints, their success was frequently attributed to exceptional male teachers or support rather than to their own genius. When they worked in genuinely innovative styles, their work was often not recognized as such until decades later — if at all.</p><h2>The Artists History Missed</h2><p>Hilma af Klint was painting abstract art years before Kandinsky and Mondrian — but because she was a Swedish woman who stipulated that her work not be shown publicly for 20 years after her death, and because the male-dominated art world that evaluated her contemporaries was not interested in her when those years elapsed, she was almost entirely absent from the history of abstract art for most of the 20th century. The discovery of her work in the 1980s and its subsequent exhibition at the Guggenheim in 2018 — which attracted the museum's largest attendance in its history — forced a significant rewriting of the early history of abstraction.</p><p>Alice Neel spent decades painting unflinching, psychologically penetrating portraits of her New York City neighbours, friends, family, and pregnant women — nudes that were categorically different from the male gaze's representation of the female body, because they were painted by a woman who was interested in her subjects as people rather than as objects of desire or aesthetic contemplation. Her work was not exhibited at major institutions until she was in her seventies, and a major retrospective did not come until after her death.</p><h2>The Market Problem</h2><p>The undervaluation of women artists is not merely historical. In the contemporary art market, works by women artists sell for significantly less than comparable works by male artists — a "gender pricing gap" documented in multiple analyses of auction results. The gap is particularly pronounced for post-war and contemporary works, where women artists achieve on average roughly 50–60 cents for every dollar achieved by male artists of equivalent stature. This market undervaluation both reflects and perpetuates the institutional undervaluation of women's art.</p><p>The past decade has seen significant efforts to address this — dedicated programs at major auction houses, museum acquisition programs explicitly targeting women artists, and a new generation of collectors prioritizing women's work. Whether these initiatives can close a gap that is centuries in the making remains to be seen.</p>`,
+  faqs:[{q:"Who are the Guerrilla Girls?",a:"The Guerrilla Girls are a feminist activist art collective founded in New York City in 1985. Members adopt the names of deceased women artists as pseudonyms and wear gorilla masks in public appearances. They use humor, statistics, and public art to expose sexism and racism in the art world and broader culture."},{q:"Who is Hilma af Klint?",a:"Hilma af Klint (1862–1944) was a Swedish artist who developed an abstract visual language years before the artists typically credited with inventing abstract art. Her work, based partly on spiritual and scientific investigation, was kept from public view per her wishes until the 1980s. A 2018 Guggenheim retrospective attracted record attendance and prompted significant revision of abstract art history."},{q:"What is the gender pricing gap in the art market?",a:"The gender pricing gap refers to the documented pattern in which works by women artists achieve significantly lower prices at auction than comparable works by male artists. Analysis of auction data consistently shows women artists receiving approximately 50-60% of what male artists of equivalent stature and period achieve for comparable works."},{q:"How is the art world beginning to address historical exclusion of women?",a:"Initiatives include major museum acquisition programs explicitly targeting women artists (like the Tate's 'Artist Rooms'), retrospectives rediscovering overlooked women artists, auction house programs championing women's work, academic curriculum reform, and a new generation of collectors and critics actively prioritizing women's art."},{q:"Are there contemporary women artists achieving recognition on their own terms?",a:"Yes — artists including Kara Walker, Cindy Sherman, Yayoi Kusama, Jenny Holzer, Kerry James Marshall, and Zanele Muholi have achieved global recognition and significant market success. The next generation includes artists like Cecily Brown, Tschabalala Self, and Julie Mehretu, working across a vast range of media and cultural contexts."}]
+},
+{
+  id:7,title:"First Generation: What It Really Costs to Be the Family's Big Bet",
+  category:"Education",author:"Priya Nair",date:"July 15, 2025",
+  img:"https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=900&auto=format&fit=crop&q=80",
+  excerpt:"When you are the first in your family to go to university, you carry everyone's hopes and sacrifice. The psychological weight of that is almost never discussed — but it's shaping how millions of women experience higher education.",
+  content:`<p>Aisha was the first person in her family — extended family, not just immediate — to attend university. Her parents had immigrated from Pakistan when she was three, and her father drove a taxi while her mother worked in a textile factory. They had saved since she was born for her education. When she got her acceptance letter, her mother wept. When she packed her bags for a university three hours away, her grandmother pressed into her hands a small photograph of Mecca. The weight of love and expectation in that moment was not metaphorical. It was physical. She felt it in her chest for the next four years.</p><img class="inline-img" src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=800&auto=format&fit=crop&q=80" alt="First generation university student"><h2>The Invisible Weight</h2><p>First-generation university students — those whose parents did not attend university — now make up a significant proportion of higher education enrollment in many countries, driven by expanding access programs, scholarships, and the growing recognition that educational diversity produces better outcomes for everyone. This is unambiguously good. But the narrative of first-generation university attendance has tended to focus almost exclusively on the opportunity side of the equation while saying almost nothing about the psychological and social costs that first-generation students, and particularly first-generation women, navigate.</p><p>The costs are real. First-generation students are statistically more likely to experience imposter syndrome — the chronic, often debilitating sense that you don't really belong, that you are not as intelligent as your peers believe, that your success is fraudulent and your eventual unmasking is inevitable. They are more likely to experience anxiety and depression. They are more likely to feel alienated from both their university environment — which was designed for and reflects the culture of those with privilege — and from their home communities, where academic success can feel like departure rather than achievement.</p><h2>The Double Bind for Women</h2><p>For first-generation women, these challenges are compounded by gender dynamics that operate both at university and at home. At university, women from working-class and immigrant backgrounds often experience the intersection of class condescension and gender dismissiveness from peers and sometimes from professors. At home, their academic success may create complicated family dynamics: younger siblings who feel implicitly compared; parents whose pride is mixed with anxiety about their daughter's changing aspirations and the cultural distance those changes may create; and, in some families, gender-specific expectations about marriage and domesticity that can conflict with the demands of an academic career.</p><p>The psychological experience of being pulled between two worlds — the world of origin and the world of aspiration — is one that researchers call "bicultural identity navigation." It is exhausting. It is constant. And it is almost never acknowledged by universities, which tend to treat first-generation status as a socioeconomic variable rather than an ongoing identity experience with real psychological dimensions.</p><h2>What Universities Actually Need to Do</h2><p>The evidence on what helps first-generation students thrive is reasonably clear, even if implementation remains patchy. Peer mentoring — connecting first-generation students with recent graduates who share their backgrounds — provides the combination of practical knowledge and role modelling that family networks can't supply. Financial support that goes beyond tuition to cover living costs, technology, and professional development opportunities addresses the material disadvantages that compound the psychological ones. Institutional cultures that explicitly value diverse backgrounds, rather than treating them as deficits to be overcome, create environments where first-generation students can bring their full selves to their education.</p><p>Most importantly, universities need to acknowledge the psychological reality of what they are asking first-generation students to do: not just learn new subjects but navigate between two cultures, manage others' expectations, and construct a new identity that integrates rather than abandons where they came from. That is an enormous amount to ask of any 18-year-old. Acknowledging it, and supporting it, is the minimum they deserve.</p>`,
+  faqs:[{q:"What is a first-generation university student?",a:"A first-generation university student is typically defined as someone whose parents did not complete a four-year university degree. Definitions vary by institution and country — some define it as having parents who did not attend any post-secondary education. First-generation students now make up significant proportions of enrollment at many universities worldwide."},{q:"What is imposter syndrome and why does it affect first-generation students disproportionately?",a:"Imposter syndrome is the persistent feeling that you are not as competent as others believe you are, that your success is attributable to luck rather than ability, and that you will eventually be 'found out.' First-generation students are disproportionately affected because they have fewer cultural reference points for university success and fewer family members who can normalize their experience."},{q:"What is bicultural identity navigation?",a:"Bicultural identity navigation describes the psychological process of moving between two cultural worlds — typically the culture of origin (family, community, class background) and the culture of aspiration (university, professional class, dominant culture) — and managing the tensions, code-switching, and identity conflicts that this movement creates."},{q:"What interventions are most effective for first-generation student success?",a:"Research consistently supports: mentoring from near-peers with shared backgrounds, financial support beyond tuition, summer bridge programs before first year, proactive academic advising, explicit teaching of 'hidden curriculum' (professional norms, networking, office hours culture), and institutional cultures that frame diverse backgrounds as assets."},{q:"How can families best support first-generation university students?",a:"Open conversations about the psychological as well as academic aspects of university; acknowledging that some degree of cultural distance is normal and does not represent rejection of family values; maintaining connection while allowing independence; and celebrating academic success without creating pressure that compounds imposter syndrome are all supportive approaches."}]
+},
+{
+  id:8,title:"Soil Sisters: The Women Feeding Nations Through Regenerative Agriculture",
+  category:"Environment",author:"Nadia Okonkwo",date:"July 22, 2025",
+  img:"https://images.unsplash.com/photo-1518531933037-91b2f5f229cc?w=900&auto=format&fit=crop&q=80",
+  excerpt:"Across three continents, women farmers are leading a quiet revolution in how we grow food — rebuilding soil, sequestering carbon, and producing harvests that can survive the climate crisis.",
+  content:`<p>Josephine Wanjiku has been farming the red volcanic soil of Kenya's central highlands for 35 years. She inherited four acres from her mother, who inherited it from hers. For most of her farming life, she used the practices she was taught: plough deep, apply chemical fertilizers, spray pesticides, and harvest as much as possible. For the past eight years, she has been farming differently. No tillage. Compost instead of chemicals. Diverse crops planted together rather than monocultures. Cover crops in the off-season. Her yields are higher than they have ever been. Her soil is darker and richer than her neighbours' fields. And in the droughts that have become more frequent and more severe with climate change, her crops survive when others fail.</p><img class="inline-img" src="https://images.unsplash.com/photo-1508739773434-c26b3d09e071?w=800&auto=format&fit=crop&q=80" alt="Women farmers agriculture"><h2>What Is Regenerative Agriculture?</h2><p>Regenerative agriculture is a set of farming practices that go beyond sustainability — beyond simply minimising harm — to actively restore ecosystem health, rebuild soil organic matter, and increase biodiversity. Its core principles include minimizing soil disturbance (no or minimal tillage), maintaining living root systems in the soil year-round (through cover crops and perennials), maximizing diversity (polycultures, crop rotation, integrating livestock), and keeping the soil covered (with mulch, cover crops, or crop residues). These practices, working together, rebuild the soil microbiome that is the foundation of terrestrial food production and can simultaneously sequester significant amounts of atmospheric carbon.</p><p>What makes regenerative agriculture particularly significant from a women's empowerment perspective is the disproportionate role that women are playing in its adoption and its outcomes. Women comprise approximately 43% of the agricultural labor force globally, rising to over 60% in some African and Asian countries. They grow the majority of food consumed in sub-Saharan Africa. Yet they receive only about 20% of agricultural technical assistance, own less than 15% of agricultural land, and receive less than 10% of formal agricultural credit. This systemic disadvantage means that when a new agricultural paradigm offers lower input costs (no synthetic fertilizers or pesticides), it is women farmers — chronically capital-constrained — who benefit most from its adoption.</p><h2>Networks That Work</h2><p>Across Kenya, Uganda, India, Mexico, and Brazil, women farmers are forming networks that are accelerating regenerative agriculture adoption in ways that conventional agricultural extension programs have never achieved. These networks — often informal, operating through WhatsApp groups, community meetings, and farmer field schools — function as knowledge-sharing systems, mutual aid organizations, and collective buying and selling cooperatives simultaneously. They allow the kind of experiential learning that static training programs can't provide: seeing a neighbour's farm, asking specific questions in your own language, understanding how a technique adapts to your specific soil and microclimate.</p><p>In India's Andhra Pradesh state, the government-supported Community Managed Natural Farming program has worked with over 700,000 women farmers to transition away from chemical inputs. Early results show not only improved yields and incomes but dramatic improvements in farm biodiversity, soil health, and farmers' sense of agency and confidence. The women involved report that managing their own seed banks, preparing their own natural pest management solutions, and reducing dependency on input suppliers gives them a degree of control over their farming livelihoods that purchased inputs never did.</p><h2>Climate Resilience and Carbon</h2><p>Beyond food production, women-led regenerative farming is contributing to climate resilience in ways that are only beginning to be quantified. Soils that have been managed regeneratively sequester significantly more carbon than conventionally farmed soils. Diverse polyculture systems are more resilient to climate extremes than monocultures. Healthy soil with good structure retains water more effectively, making farms more drought-resistant. These ecosystem services — carbon sequestration, water retention, biodiversity support — have real economic value but are currently uncompensated in most farming systems. As carbon markets and ecosystem service payment programs develop, women farmers who have invested in soil health stand to gain from the monetization of benefits they have been providing for free.</p>`,
+  faqs:[{q:"What is the difference between regenerative and organic agriculture?",a:"Organic agriculture prohibits synthetic inputs (pesticides, fertilizers) but doesn't necessarily improve soil health. Regenerative agriculture focuses specifically on rebuilding soil health, increasing biodiversity, and restoring ecosystem function. Regenerative can overlap with organic but focuses more on outcomes (soil carbon, biodiversity) than on input restrictions."},{q:"What percentage of the global food supply is grown by women?",a:"Women produce approximately 60–80% of food consumed in developing countries and comprise 43% of the global agricultural workforce. Despite this, they own less than 15% of agricultural land and receive less than 10% of formal agricultural credit — a structural inequality that limits their productivity and income."},{q:"What is the Community Managed Natural Farming program in Andhra Pradesh?",a:"CMFN (now called Andhra Pradesh Community Managed Natural Farming) is a government-supported program that has transitioned over 700,000 farmers — primarily women — away from chemical inputs to low-cost natural farming methods. It has become one of the world's largest natural farming programs and is being studied as a model for other Indian states and countries."},{q:"Can regenerative agriculture actually address climate change?",a:"Research suggests that wide-scale adoption of regenerative practices could sequester significant amounts of carbon in agricultural soils, while also reducing emissions from chemical fertilizer production and application. It is not a silver bullet — emissions reduction must still be the primary climate strategy — but it represents a significant potential contribution to carbon drawdown."},{q:"How can consumers support women farmers doing regenerative agriculture?",a:"Support includes buying from farmers markets and CSAs that source locally, choosing food certified under regenerative or agroecological standards, supporting policy advocacy for farm subsidy reform that rewards soil health rather than volume, and contributing to organizations that provide women farmers with land rights, training, and market access."}]
+},
+{
+  id:9,title:"The Night Shift: Stories from Women Who Work While the World Sleeps",
+  category:"Entrepreneurship",author:"Priya Nair",date:"July 29, 2025",
+  img:"https://images.unsplash.com/photo-1573497019236-17f8177b81e8?w=900&auto=format&fit=crop&q=80",
+  excerpt:"They stock shelves, clean offices, drive buses, nurse patients, and bake bread while the rest of us sleep. The women of the night economy are essential — and almost entirely invisible.",
+  content:`<p>Every morning when you walk into a clean office building, someone was there at 3 a.m. with a mop and a vacuum and aching feet. Every time you take a night bus, someone spent the night navigating routes while you slept in your seat. Every time you are admitted to a hospital at midnight, a team of predominantly female nurses and healthcare assistants coordinates your care through the small hours. The night economy is vast, essential, and overwhelmingly staffed by women — particularly by women of colour and immigrant women — who are rarely seen, rarely celebrated, and rarely paid what their labour is worth.</p><img class="inline-img" src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=800&auto=format&fit=crop&q=80" alt="Women night work"><h2>Who Works the Night</h2><p>In the United Kingdom, approximately 4 million people work night shifts, with healthcare, hospitality, transport, manufacturing, and cleaning employing the largest numbers. Women are disproportionately represented in healthcare and cleaning — the two sectors with the lowest pay relative to the physical and emotional demands of the work. In cleaning specifically, the workforce is between 70–80% women, with significant overrepresentation of women born outside the UK, particularly from South and East Asia, Eastern Europe, and Sub-Saharan Africa.</p><p>These women are cleaning the floors of the companies that have written corporate diversity and inclusion statements. They are mopping the offices of the law firms defending workers' rights. They are vacuuming the corridors of universities conducting research on gender inequality. The irony is not lost on them.</p><h2>The Double Shift</h2><p>What is almost never discussed is that night shift work for women does not replace the domestic shift — it doubles it. A woman who finishes a hospital shift at 7 a.m. does not come home to a house where the morning routine is handled. In most cases, she comes home to children who need to be fed and taken to school, to a domestic routine that doesn't have an off button, and to a partner who has already left for the day shift. She sleeps when she can. She is perpetually exhausted. Her health suffers — not because she is fragile, but because human beings were not designed to work against their circadian rhythms while also performing the full load of domestic and care responsibilities.</p><p>The health impacts of night shift work are well documented: higher rates of cardiovascular disease, metabolic disorders, sleep disruption and its cascading effects, and elevated cancer risk (the International Agency for Research on Cancer classifies overnight shift work as a probable carcinogen). These health risks fall disproportionately on women who have fewer choices about whether to work nights — because the wages are slightly higher, because daytime childcare is unaffordable or unavailable, because their immigration status limits their employment options.</p><h2>Organising in the Dark</h2><p>Despite these challenges — or perhaps fueled by them — women night shift workers are organizing. The Justice for Janitors campaign in the United States has won significant wage increases and benefit improvements for predominantly female, predominantly immigrant cleaning workers. In the UK, the Independent Workers Union of Great Britain (IWGB) has won major campaigns for migrant cleaning workers at universities and financial institutions, including at the University of London and Goldman Sachs. These campaigns share a common feature: they are led primarily by women who have decided that invisibility is not the same as powerlessness.</p>`,
+  faqs:[{q:"What percentage of night shift workers are women?",a:"Women are overrepresented in several major night shift sectors, comprising 70-80% of the cleaning workforce and a majority in healthcare. However, the specifics vary significantly by industry and country. Women's night shift participation often reflects constraints — lower pay in female-dominated sectors, childcare gaps, immigration status — rather than free choice."},{q:"What are the health risks of night shift work?",a:"Night shift work is associated with elevated risks of cardiovascular disease, type 2 diabetes, metabolic syndrome, depression, sleep disorders, and certain cancers. The International Agency for Research on Cancer classifies overnight shift work as a probable carcinogen. These risks are compounded when workers also carry primary domestic and care responsibilities during daytime hours."},{q:"Who are Justice for Janitors?",a:"Justice for Janitors is a campaign of the Service Employees International Union (SEIU) in the United States that has organized primarily immigrant and minority cleaning workers since the 1980s. Using direct action, political advocacy, and community organizing, the campaign has won significant wage increases, benefits, and improved conditions for tens of thousands of workers."},{q:"What is the IWGB?",a:"The Independent Workers Union of Great Britain is a UK trade union representing workers in precarious, gig, and migrant-heavy sectors often overlooked by traditional unions. It has won significant campaigns for cleaners, couriers, and security guards at major institutions, often using direct action and legal challenges."},{q:"What policy changes would most help night shift women workers?",a:"Key policies include: minimum wage enforcement and above-inflation increases; mandatory shift supplements (extra pay for unsocial hours); affordable 24-hour childcare; immigration pathways that don't trap workers in exploitative employment; mental health and occupational health support; and enforcement of health and safety regulations for night workers."}]
+},
+{
+  id:10,title:"Beyond the Veil: Muslim Women Redefining Faith on Their Own Terms",
+  category:"Arts",author:"Zara Al-Hussaini",date:"August 5, 2025",
+  img:"https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=900&auto=format&fit=crop&q=80",
+  excerpt:"Western media has a single story about Muslim women. Muslim women have a million different ones. This is a story about reclaiming narrative authority in a world that has decided who you are.",
+  content:`<p>There is a particular exhaustion that comes from being a symbol before you are a person. Muslim women — in Western countries particularly — navigate a double gaze: the orientalist gaze that exoticises and flattens them, and the reactionary gaze that sees their faith as incompatible with feminist values, intelligence, and autonomy. Neither gaze is interested in complexity. Neither is interested in them as individuals. Both are interested in them as arguments in debates they did not start and were not asked to participate in.</p><img class="inline-img" src="https://images.unsplash.com/photo-1530973428-5bf2db2e4d71?w=800&auto=format&fit=crop&q=80" alt="Muslim women culture diversity"><h2>The Single Story Problem</h2><p>The Nigerian author Chimamanda Ngozi Adichie famously described the danger of the single story — the way that when a person or group is represented by only one narrative, they lose their complexity and humanity. The single story about Muslim women is familiar: oppressed, veiled, voiceless, and in need of rescue by Western liberal feminism. This story is not only false — it is useful, to those who want to justify particular foreign policy positions, to those who profit from exoticising difference, and to those who have found that moral authority over distant women's bodies is easier to claim than confronting injustice closer to home.</p><p>The reality of Muslim women's lives globally is vastly more complex, varied, and agentic than this single story allows. Muslim women run countries — Bangladesh has been led by women prime ministers for most of the past three decades. Muslim women win Nobel Prizes — Malala Yousafzai, Shirin Ebadi, Tawakkol Karman. Muslim women compete in the Olympics, lead companies, direct films, practice law, and do surgery. They also, in some contexts, face genuine religious and patriarchal oppression. Both things are true simultaneously, and both deserve acknowledgment — but the Western tendency to use the second truth to erase the first truth is a distortion with real consequences.</p><h2>Reclaiming Narrative Authority</h2><p>Across journalism, literature, film, visual art, and social media, Muslim women are working to reclaim narrative authority over their own stories. Novelists like Leila Aboulela, Mohja Kahf, and Kamila Shamsie write Muslim women characters in full psychological complexity — as protagonists with interior lives, contradictions, desires, humor, and agency. Filmmakers like Haifaa al-Mansour (Saudi Arabia's first female director) and Maryam Keshavarz are creating visual narratives from inside Muslim women's experiences. Social media creators with massive platforms are modeling Muslim womanhood that refuses the binary of either oppressed victim or tokenized exception.</p><p>What these artists and storytellers share is an insistence on particularity over generality. Their characters and subjects are not "Muslim women" in the abstract — they are specific people from specific places with specific histories, relationships, and aspirations. This specificity is the antidote to the single story, and creating it requires control over the means of storytelling — which is why representation in newsrooms, publishing, and film production matters as much as representation in the stories themselves.</p><h2>Feminism and Faith</h2><p>Islamic feminism — the project of interpreting Islamic text and tradition through a gender-just lens — has a long and serious intellectual history that is almost entirely invisible in Western feminist discourse. Scholars like Amina Wadud, Fatima Mernissi, and Asma Barlas have produced rigorous scholarship demonstrating that patriarchal interpretations of Islamic text are historical and contextual rather than inherent to the religion, and that the Quran itself contains resources for gender-equal readings that have been systematically suppressed by patriarchal religious authority.</p>`,
+  faqs:[{q:"What is the 'single story' and why is it harmful?",a:"The 'danger of the single story' is a concept articulated by Chimamanda Ngozi Adichie to describe how representing a person or group with only one narrative strips them of complexity and humanity, creating stereotypes. For Muslim women, the single story of oppression and victimhood obscures the enormous diversity of Muslim women's lives and experiences globally."},{q:"What is Islamic feminism?",a:"Islamic feminism is an intellectual and activist movement that uses Islamic sources and frameworks to articulate gender justice and challenge patriarchal interpretations of Islamic law and tradition. Key scholars include Amina Wadud, Fatima Mernissi, and Asma Barlas, who argue that the Quran contains egalitarian principles that have been suppressed by historically patriarchal religious interpretations."},{q:"Which Muslim women have won Nobel Prizes?",a:"Nobel Prize winners with Muslim backgrounds include Malala Yousafzai (Peace, 2014), Shirin Ebadi (Peace, 2003), and Tawakkol Karman (Peace, 2011 — one of three laureates that year). All three are human rights advocates who faced significant personal risk for their activism."},{q:"Who is Haifaa al-Mansour?",a:"Haifaa al-Mansour is a Saudi Arabian film director, widely recognized as Saudi Arabia's first female feature film director. Her debut film 'Wadjda' (2012) — a story about a Saudi girl who wants a bicycle — was the first feature film shot entirely in Saudi Arabia. She went on to direct the Hollywood film 'Mary Shelley' (2017)."},{q:"How can media do better in representing Muslim women?",a:"Better representation requires: hiring Muslim women journalists, editors, and executives; seeking Muslim women as expert sources rather than subjects; covering the full diversity of Muslim women's experiences and geographies; distinguishing between religious and cultural practices; avoiding treating Muslim women as monolithic; and platforming Muslim women artists, scholars, and activists to tell their own stories."}]
+},
+{
+  id:11,title:"The Science of Rest: Why Women's Bodies Need Recovery Differently",
+  category:"Wellness",author:"Zara Al-Hussaini",date:"August 12, 2025",
+  img:"https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=900&auto=format&fit=crop&q=80",
+  excerpt:"Medical research has largely ignored women's biology. The result: sleep recommendations, stress management advice, and recovery protocols that don't actually work for half the population.",
+  content:`<p>The field of sleep science made a foundational error for much of the 20th century: it studied sleep primarily in male subjects and published the results as universal truth. Sleep cycle research, circadian rhythm studies, and insomnia treatment protocols were developed on male bodies and applied to everyone. The result: a set of sleep and recovery recommendations that work reasonably well for men and dramatically underserve women, whose sleep architecture, hormonal cycles, and stress physiology differ significantly from men's in ways that matter enormously for health.</p><img class="inline-img" src="https://images.unsplash.com/photo-1520206183501-b80df61043c2?w=800&auto=format&fit=crop&q=80" alt="Women sleep rest wellness"><h2>How Women's Sleep Is Different</h2><p>Women, on average, need approximately 20 minutes more sleep per night than men — a finding that emerges consistently in polysomnography studies. Women spend more time in deep NREM (non-rapid eye movement) sleep, which is essential for physical restoration, immune function, and memory consolidation. They are more vulnerable to insomnia — women are 40% more likely to suffer from it than men — and the causes of their insomnia are often different from men's, relating more frequently to hormonal fluctuations, anxiety, and the hypervigilance associated with being the primary nighttime caregiver in a household.</p><p>The hormonal dimension is significant and largely unaddressed in mainstream sleep advice. Women's sleep quality changes across the menstrual cycle: many women experience disrupted sleep in the premenstrual phase, associated with falling progesterone levels. Pregnancy dramatically alters sleep architecture in all three trimesters. The postpartum period — during which many women experience sleep deprivation severe enough to constitute a significant health crisis — receives almost no formal medical support in most healthcare systems. Perimenopause and menopause bring night sweats, hot flushes, and altered circadian rhythms that create chronic sleep disruption for years. At each of these hormonal transitions, the advice available to women is inadequate and the research base thin.</p><h2>Stress and the Tend-and-Befriend Response</h2><p>Women's stress physiology also differs significantly from the fight-or-flight model that dominates stress research — a model derived almost entirely from male subjects. UCLA researchers Shelley Taylor and Laura Klein proposed the "tend-and-befriend" model in 2000, based on research showing that women under stress are more likely to respond by seeking social connection and tending to dependent others than by fighting or fleeing. This difference has implications not only for how women experience stress but for what kind of stress relief actually works for them.</p><p>Solitary stress management techniques — meditation apps, individual exercise, journaling — are well-evidenced and valuable. But for many women, the most effective stress response is social: talking to a friend, connecting with community, being in the presence of people they trust. This is not weakness or dependency. It is a healthy, adaptive response to stress that the individualistic wellness industry systematically undervalues.</p><h2>Rest as Radical Act</h2><p>The cultural pressure on women to be perpetually productive — to use every moment efficiently, to feel guilty about rest, to treat sleep as a competitive disadvantage rather than a biological necessity — is not just an inconvenience. It is a health crisis. Chronic sleep deprivation is associated with increased risk of cardiovascular disease, diabetes, obesity, immune dysfunction, and depression. The expectation that women will sacrifice sleep to manage the full load of career, domestic, and care responsibilities is not a neutral observation about modern life. It is a structural feature of a society that has not yet built the support systems — paid parental leave, affordable childcare, genuine domestic labour sharing — that would allow women to rest adequately.</p>`,
+  faqs:[{q:"Why do women need more sleep than men?",a:"Research consistently shows women need approximately 20 more minutes of sleep per night than men on average. Women's brains perform more complex multitasking during the day (managing the mental load), which requires more recovery time during sleep. Women also spend more time in deep restorative sleep phases, suggesting a greater need for recovery."},{q:"How do hormonal cycles affect women's sleep?",a:"The menstrual cycle significantly affects sleep: progesterone has sedative properties and rises after ovulation, while the premenstrual drop in progesterone disrupts sleep for many women. Pregnancy disrupts sleep in all three trimesters for different reasons. Perimenopause brings night sweats and hot flushes. Each transition has distinct sleep impacts that are poorly addressed in clinical practice."},{q:"What is the tend-and-befriend stress response?",a:"The tend-and-befriend response, proposed by UCLA researchers Taylor and Klein in 2000, describes the pattern in which women under stress tend to respond by nurturing dependents and seeking social connection rather than by fighting or fleeing. It is mediated partly by oxytocin and explains why social connection is often particularly effective stress relief for women."},{q:"What is sleep hygiene and how should it be adapted for women?",a:"Sleep hygiene refers to habits and environmental conditions that promote good sleep. For women, standard advice should be adapted to account for hormonal cycles (adjusting sleep schedules premenstrually), temperature regulation for perimenopausal symptoms, and particular attention to creating genuine transition time from the mental load of caregiving before sleep."},{q:"How can healthcare providers better address women's sleep?",a:"Better care would include: screening for hormonal contributions to insomnia across the life course; treating perimenopausal sleep disruption as a legitimate medical issue rather than an inconvenience; providing postpartum sleep support as standard; recognizing anxiety and mental load as primary insomnia drivers in women; and offering hormonal therapy as an option for sleep disruption where appropriate."}]
+},
+{
+  id:12,title:"Code Mothers: The Women Who Secretly Built the Digital World",
+  category:"Science",author:"Zara Al-Hussaini",date:"August 19, 2025",
+  img:"https://images.unsplash.com/photo-1551434678-e076c223a692?w=900&auto=format&fit=crop&q=80",
+  excerpt:"Before Silicon Valley. Before the internet. Before personal computers. Women wrote the code, built the compilers, and laid the mathematical foundations of the digital age — and were largely erased from the story.",
+  content:`<p>In 1945, when the ENIAC computer — often described as the first general-purpose electronic computer — was completed at the University of Pennsylvania, the machine's hardware was assembled and celebrated. The people who programmed it were not. The ENIAC programmers — six women named Jean Jennings Bartik, Frances Bilas Spence, Betty Holberton, Ruth Lichterman Teitelbaum, Frances Elizabeth Snyder Holberton, and Marlyn Meltzer — were not introduced at the public unveiling. In photographs, they were identified as "refrigerator ladies" — assumed to be models standing next to the machine rather than the scientists who had spent months figuring out how to make it work.</p><img class="inline-img" src="https://images.unsplash.com/photo-1629904853716-f0bc54eea481?w=800&auto=format&fit=crop&q=80" alt="Women in computing history"><h2>How Women Built Computing</h2><p>The erasure of the ENIAC programmers was not an isolated incident. It was part of a systematic pattern in which women's contributions to the foundations of computer science were claimed by the field while their names were omitted from its history. Ada Lovelace wrote the first algorithm in the 1840s. Grace Hopper invented the first compiler in 1952, making programming accessible to non-mathematicians and laying the foundation for every high-level programming language that followed. Margaret Hamilton coined the term "software engineering" and wrote the code that landed humans on the moon. Radia Perlman invented the spanning tree algorithm that makes the internet possible.</p><p>These names are beginning to be better known, the result of decades of advocacy by women in computing who insisted on recovering this buried history. But the deeper pattern remains: computing was built by women, became dominated by men as it gained prestige and pay, and then had its history rewritten to reflect the composition it became rather than the composition it started with.</p><h2>How Computing Became Male</h2><p>In the 1950s and 1960s, programming was considered clerical work — like typing — and was assigned predominantly to women while men built the hardware. As computing's strategic and economic importance became clear, the field was progressively masculinized. By the 1980s, when personal computers entered homes, they were marketed almost exclusively to boys. Computer science university enrollment among women peaked in 1984 at approximately 37% and has been declining since, reaching around 18% by 2015. The marketing of the personal computer to boys created a generation of boys who arrived at university with home programming experience that girls lacked, which then became constructed as natural talent rather than differential socialization.</p><p>Understanding this history dismantles the naturalness of computing's gender gap. There is nothing inherently male about mathematical reasoning, algorithmic thinking, or software engineering. These capacities are distributed across human beings regardless of gender. The concentration of men in computing reflects historical choices — about marketing, hiring, culture, and who gets to be a "real" programmer — not any natural aptitude difference.</p><h2>Who Is Recovering This History</h2><p>Organizations including the Computer History Museum, the Association for Computing Machinery's Committee on Women, and individual academics like historian Janet Abbate (author of "Recoding Gender") are working to recover and document women's contributions to computing. Their work matters not only as historical justice but as present tool: when girls today see that the founders of their field were women, when they understand that the gender composition of computing is the result of cultural choices rather than natural order, they are armed against the messaging that tells them they don't belong.</p>`,
+  faqs:[{q:"Who were the ENIAC programmers?",a:"The six ENIAC programmers were Jean Jennings Bartik, Frances Bilas Spence, Betty Holberton, Ruth Lichterman Teitelbaum, Frances Elizabeth Snyder Holberton, and Marlyn Meltzer. They were tasked with programming ENIAC to calculate ballistic trajectories during WWII and spent months developing the techniques to operate the machine — work for which they received almost no public recognition for decades."},{q:"Who is Grace Hopper and what did she invent?",a:"Grace Murray Hopper (1906–1992) was a US Navy rear admiral and computer scientist who invented the first compiler — a program that translates human-readable code into machine language — in 1952. Her work made programming accessible to non-mathematicians and laid the foundation for COBOL and all subsequent high-level programming languages. She is also credited with popularizing the term 'debugging.'"},{q:"Why did women's participation in computer science decline after 1984?",a:"Multiple factors converged: personal computers were marketed almost exclusively to boys and men; tech culture developed masculine norms that made the field unwelcoming to women; boys who had home computer experience arrived at university already ahead, creating a gap constructed as natural talent; and academic CS programs did little to counter the hostile culture that developed."},{q:"Who is Margaret Hamilton?",a:"Margaret Hamilton is a software engineer who led the team that developed the flight software for NASA's Apollo missions. She coined the term 'software engineering' and her code flew humans to the moon and back safely. In 2016, President Obama awarded her the Presidential Medal of Freedom."},{q:"What organizations are working to recover women's computing history?",a:"Key organizations include the Computer History Museum (which maintains oral history archives of women in computing), the Association for Computing Machinery's Committee on Women in Computing, the Computing Research Association's Committee on the Status of Women, and academic programs in the history of technology at various universities."}]
+},
+{
+  id:13,title:"The Grandmother Effect: How Older Women Hold Communities Together",
+  category:"Education",author:"Nadia Okonkwo",date:"August 26, 2025",
+  img:"https://images.unsplash.com/photo-1521737604893-d14cc237f11d?w=900&auto=format&fit=crop&q=80",
+  excerpt:"In cultures worldwide, grandmothers are the invisible glue holding families and communities together. New research is confirming what we always intuitively knew — and revealing the profound costs of ignoring them.",
+  content:`<p>The Hadza people of Tanzania have been hunter-gatherers for tens of thousands of years, and among them, as in many traditional societies, older women play a role that is both practically essential and theoretically significant. When Hadza women reach menopause and can no longer have children of their own, they do not retire — they redirect. They gather food at higher rates than younger women, who are burdened by young children. The extra nutrition they provide demonstrably improves the survival rates of their grandchildren. Anthropologist Kristen Hawkes, who documented this pattern in the 1980s, called it the "grandmother effect" — and it has since spawned one of the most significant theories in evolutionary biology.</p><img class="inline-img" src="https://images.unsplash.com/photo-1517486808906-6ca8b3f04846?w=800&auto=format&fit=crop&q=80" alt="Grandmothers community"><h2>The Grandmother Hypothesis</h2><p>The grandmother hypothesis proposes that the unusual length of human post-reproductive life — unique among great apes — evolved specifically because of grandmothers' contributions to their descendants' survival. Unlike other apes, in which females continue reproducing until shortly before death, human women undergo menopause in midlife and then live for decades more. The grandmother hypothesis suggests this is not an evolutionary accident but an adaptation: the survival advantages conferred by having a vigorous, experienced older woman focused on grandchildren's survival outweighed the reproductive cost of the menopause.</p><p>The hypothesis is still debated, but it has found support in multiple independent datasets across diverse cultural settings. Historical demographic analyses of Finnish and Canadian church records, contemporary ethnographic studies of the Hadza and the Pimbwe of Tanzania, and studies of traditional communities in Japan and Korea all show that the presence of a maternal grandmother is associated with measurable improvements in grandchildren's survival, growth, and health outcomes. The grandmother effect is real, robust, and consistent across cultures separated by thousands of miles and thousands of years.</p><h2>What Grandmothers Actually Do</h2><p>In contemporary urban settings, grandmothers' contributions take forms that are more immediately visible but no less significant. In the United States, approximately 2.5 million grandparents are the primary caregivers for their grandchildren — a number that has grown significantly in the wake of the opioid crisis, the foster care system's inadequacies, and the growing costs of formal childcare. These grandparents — disproportionately grandmothers — are providing care that would otherwise cost hundreds of thousands of dollars annually in formal services, and receiving almost no formal support for doing so.</p><p>Beyond primary caregiving, grandmothers function as supplemental childcare providers, emergency systems for families under stress, transmitters of cultural knowledge and language, emotional regulators in family systems, and economic contributors through both direct financial support and the release of parental time for paid work. The economic value of grandmothers' contributions to families and communities is enormous and almost entirely unacknowledged in national economic accounts.</p><h2>The Isolation Crisis</h2><p>The systematic isolation of older women in contemporary Western societies is therefore not merely a social problem — it is an economic and community health crisis. Nuclear family structures, geographic mobility, and the institutional segregation of older adults (in retirement homes, assisted living facilities, and age-segregated communities) have disrupted the multigenerational household structures through which grandmothers' contributions historically operated. Older women who are isolated from family and community are not just personally diminished — the communities around them are deprived of their contributions.</p>`,
+  faqs:[{q:"What is the grandmother hypothesis?",a:"The grandmother hypothesis, developed by anthropologist Kristen Hawkes, proposes that human women's uniquely long post-reproductive lifespan evolved because grandmothers' contributions to grandchildren's survival provided evolutionary advantages. Evidence from diverse cultures shows maternal grandmother presence correlates with improved grandchild survival and health."},{q:"How many grandparents are primary caregivers in the US?",a:"Approximately 2.5 million grandparents in the United States are the primary caregivers for their grandchildren, according to US Census data. Grandmothers make up the majority of these caregivers. The number has grown significantly due to the opioid crisis, poverty, and the inadequacy of the formal foster care system."},{q:"What is the economic value of grandmothers' childcare?",a:"Economic analyses estimate that grandparent-provided childcare in the United States is worth approximately $400–500 billion annually in formal childcare costs alone. This doesn't count the emotional, cultural, and community support functions that grandmothers provide, which are harder to quantify but equally significant."},{q:"How does isolation affect older women's health?",a:"Social isolation in older women is associated with dramatically worse health outcomes including higher rates of depression, cognitive decline (including dementia), cardiovascular disease, and premature mortality. Research by Julianne Holt-Lunstad suggests that social isolation is as harmful to health as smoking 15 cigarettes per day."},{q:"What policies would better support older women caregivers?",a:"Policies include: financial support (tax credits, direct payments) for grandparent caregivers; legal recognition of their caregiving role in custody and social service systems; access to healthcare and respite care; intergenerational community design that integrates older adults into family and community life rather than segregating them; and caregiver support groups and social programs."}]
+},
+{
+  id:14,title:"Untold Frequencies: Women Who Transformed Music History",
+  category:"Arts",author:"Maya Osei",date:"September 2, 2025",
+  img:"https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=900&auto=format&fit=crop&q=80",
+  excerpt:"From the blues to electronic music to jazz to punk, women have been at the vanguard of every major musical revolution — and systematically excluded from the histories that followed.",
+  content:`<p>In 1920, Mamie Smith recorded "Crazy Blues" for OKeh Records — the first blues record by a Black female vocalist, and a commercial sensation that demonstrated to the music industry that Black audiences would spend money on recorded music by Black artists. It sold 75,000 copies in the first month. What followed — the blues, jazz, R&B, rock and roll, and ultimately all of popular music as we know it — is inconceivable without Mamie Smith's recording and the women who followed her. And yet, in the histories of popular music, this female lineage is almost never named as the origin point it clearly was.</p><img class="inline-img" src="https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=800&auto=format&fit=crop&q=80" alt="Women in music history"><h2>The Erasure Pattern</h2><p>The erasure of women from music history follows a familiar pattern: women create or participate centrally in a musical form; men inherit, commercialise, and receive credit for that form; histories are written by people who find it easier or more commercially useful to centre male narratives; and the women disappear from the official story while continuing to influence musicians who may not even know their names.</p><p>Sister Rosetta Tharpe invented rock guitar. This is not a provocative claim — it is a musicological fact, documented in her recordings from the 1940s that predate and anticipate the techniques that would define rock guitar for the next 80 years. Johnny Cash, Elvis Presley, and Little Richard were all directly influenced by her. She played electric guitar with the distortion, the showmanship, and the rhythmic power that define rock music. She toured widely. She recorded extensively. And then, somehow, the story of rock guitar came to be told without her.</p><h2>Electronic Music's Hidden Mothers</h2><p>The history of electronic music offers another case study in female erasure. Delia Derbyshire — who realized the original Doctor Who theme music in 1963 at the BBC Radiophonic Workshop — was one of the pioneers of electronic music composition, working with tape manipulation, synthesis, and musique concrète at a time when the equipment itself was largely experimental. Her work influenced generations of electronic musicians who frequently did not know her name. Daphne Oram, who co-founded the BBC Radiophonic Workshop, created a graphical sound synthesis system called Oramics that anticipated the graphical user interfaces of modern digital audio workstations by decades.</p><p>In the contemporary electronic music world, the problem persists. Festival lineups remain heavily male-dominated. The assumption that DJing and production are male skills remains embedded in industry culture. Women who produce electronic music report routine assumptions that their partners or managers must be responsible for the technical aspects of their work. The progress has been agonisingly slow.</p><h2>Punk's Female Founders</h2><p>The standard history of punk rock centres male bands — the Sex Pistols, The Clash, The Ramones. But the Slits, the Raincoats, X-Ray Spex, and Poly Styrene were every bit as central to punk's development as these canonical acts — and offered something additional: a feminist punk aesthetic that challenged gender norms as thoroughly as punk challenged musical ones. Poly Styrene's critique of consumerism and identity, delivered through a style that was deliberately anti-glamour and anti-feminine, was as radical as anything the male punk bands produced. These bands were contemporaneous with the canonical acts, reviewed in the same publications, performing on the same stages. They were subsequently edited out of the official history with remarkable efficiency.</p>`,
+  faqs:[{q:"Who was Mamie Smith and why was her 1920 recording historic?",a:"Mamie Smith was an African American singer who in 1920 recorded 'Crazy Blues' — widely recognized as the first blues vocal recording by a Black female artist. The recording's massive commercial success (75,000 copies in its first month) proved the market for Black music recorded by Black artists, opening the door for the recording industry's engagement with blues, jazz, and eventually all popular music."},{q:"Who is Sister Rosetta Tharpe?",a:"Sister Rosetta Tharpe (1915–1973) was an African American singer-guitarist whose recordings from the 1940s anticipate and predate the techniques that define rock guitar. She is credited with influencing Elvis Presley, Johnny Cash, Little Richard, Chuck Berry, and effectively the entire rock tradition. Despite her foundational influence, she was largely absent from rock histories until recent feminist musicological recovery efforts."},{q:"Who was Delia Derbyshire?",a:"Delia Derbyshire (1937–2001) was a British composer and electronic music pioneer who worked at the BBC Radiophonic Workshop from 1962. She realized the original Doctor Who theme in 1963 and created an extensive body of experimental electronic music that influenced generations of artists. Her work was underacknowledged during her lifetime and rediscovered by electronic musicians and scholars after her death."},{q:"Who were the Slits?",a:"The Slits were an all-female British punk band formed in 1976 who were central to punk and post-punk's development. Their 1979 debut album 'Cut' combined punk attitude with reggae rhythms and feminist themes in ways that anticipated much of what followed. They were regularly dismissed by critics at the time; their reputation and influence has been substantially reappraised by subsequent generations."},{q:"How can music listeners support women artists?",a:"Stream and buy music by women artists, particularly women in genres where they remain underrepresented; read and share writing that recovers women's music history; attend shows and festivals that program women; follow and amplify women music journalists and critics; and call out gender imbalances in festival lineups and awards nominations."}]
+},
+{
+  id:15,title:"What the World Looks Like When Women Lead: Evidence from 50 Countries",
+  category:"Politics",author:"Nadia Okonkwo",date:"September 9, 2025",
+  img:"https://images.unsplash.com/photo-1517486808906-6ca8b3f04846?w=900&auto=format&fit=crop&q=80",
+  excerpt:"Fifty years of data from fifty countries points to an unmistakable conclusion: when women lead nations, businesses, and communities, measurably better things happen. The evidence is in. The question is will.",
+  content:`<p>This is not a question of opinion. Researchers from the World Bank, Harvard Kennedy School, University College London, and dozens of other institutions have spent the past three decades studying what happens to communities, companies, and countries when women hold leadership positions. The data is in. And while correlation is not causation, the consistency and magnitude of the findings across wildly different cultural, economic, and political contexts makes a compelling case that women's leadership produces genuinely different — and on most measured dimensions, better — outcomes.</p><img class="inline-img" src="https://images.unsplash.com/photo-1575517111839-3a3843ee7f5d?w=800&auto=format&fit=crop&q=80" alt="Women political leadership global"><h2>The National Policy Evidence</h2><p>Countries with higher percentages of women in national legislatures consistently score higher on indices of social welfare, including healthcare access, education quality, child poverty rates, and environmental protection. Nordic countries — which have led the world in women's political representation for decades — also consistently rank highest on measures of gender equality, life expectancy, social mobility, happiness, and democratic stability. While many factors contribute to these outcomes, researchers who control for income, geography, and other variables continue to find significant independent effects of women's political representation on social welfare measures.</p><p>The most striking finding from country-level data may come from villages and districts in India, where a 1993 constitutional amendment required that one-third of local government positions be reserved for women. Researchers Esther Duflo and Abhijit Banerjee (both Nobel laureates) studied the effects of this reservation across thousands of village councils. Villages with women-led councils invested more in clean water, sanitation, and roads, and showed improved educational outcomes for girls. Village residents initially rated women leaders as less effective than men — but when researchers compared objective policy outcomes, villages led by women significantly outperformed those led by men on infrastructure and service delivery.</p><h2>The Corporate Data</h2><p>In the corporate world, evidence for women's leadership benefits has been accumulating for two decades. Studies consistently find that companies with women in senior leadership positions and on boards show higher profitability, better risk management, stronger innovation metrics, and higher employee satisfaction. McKinsey's "Women in the Workplace" research programme has found that companies in the top quartile for gender diversity in executive teams are 25% more likely to achieve above-average profitability than companies in the bottom quartile.</p><p>Critically, researchers have found that the benefits of women's leadership are not solely attributable to women having different management styles. The benefits appear to be at least partly structural: diverse leadership teams make better decisions because they bring more perspectives, are more likely to challenge groupthink, and are more likely to consider a wider range of stakeholders when making decisions. The argument for women's leadership is not that women are better leaders than men — it is that the presence of women makes leadership teams better than they would otherwise be.</p><h2>The Crisis Leadership Evidence</h2><p>Perhaps the most striking recent evidence for women's leadership effectiveness came from the global COVID-19 pandemic. Researchers at the University of Liverpool analysed COVID-19 outcomes in 194 countries and found that countries led by women had significantly lower death rates from COVID-19 than comparable countries led by men — even after controlling for GDP per capita, region, and other factors. Countries including New Zealand, Germany, Taiwan, Iceland, and Finland — all then led by women — were widely praised for their pandemic responses and showed better outcomes than their peers.</p><p>The researchers identified several factors: women leaders were more likely to implement preventive measures early; they communicated more transparently and directly with citizens; they were less likely to place economic considerations above public health in the acute phase; and they made decisions based more consistently on scientific advice. None of these is inherently female — all are learnable leadership behaviours. But the pattern of their presence in women's crisis leadership is consistent enough across contexts to be worth examining seriously.</p>`,
+  faqs:[{q:"What does research show about women in political leadership?",a:"Countries with higher women's legislative representation show better outcomes on healthcare, education, child poverty, and environmental protection. India's constitutional reservation of village council seats for women demonstrated that women-led councils invested more in water, sanitation, and infrastructure and produced better educational outcomes for girls."},{q:"Which countries are most gender-equal in political leadership?",a:"Nordic countries — Iceland, Finland, Sweden, Norway, Denmark — consistently rank highest for women's political representation and gender equality more broadly. Rwanda has the world's highest percentage of women in parliament (over 60%). New Zealand, Canada, and several Latin American countries have also made major strides in recent years."},{q:"What was the finding about women leaders and COVID-19?",a:"University of Liverpool researchers found countries led by women had significantly lower COVID-19 death rates than comparable countries led by men, even after controlling for confounding factors. Countries including New Zealand, Germany, Taiwan, Iceland, and Finland were identified for early action, transparent communication, and outcomes that outperformed regional peers."},{q:"Do women-led companies perform differently?",a:"McKinsey research finds companies in the top quartile for gender diversity in executive leadership are 25% more likely to achieve above-average profitability. Studies also show women-led companies demonstrate better risk management, innovation, and employee satisfaction. Researchers attribute benefits partly to decision-making quality improvements from diverse perspectives."},{q:"Does having more women in leadership help all women?",a:"Research shows that women leaders do benefit women more broadly: in Indian village councils, women leaders invested more in girls' education; in corporate settings, women senior leaders mentor more women and advance more women through pipelines. However, the benefits are not automatic and depend on whether women leaders actively prioritize gender equity rather than simply filling leadership roles."}]
+}
+];
+
+// ============= AUTH =============
+let isAdmin = false;
+let currentBlogId = null;
+let currentEditId = null;
+let tabMode = 'text';
+
+function openLogin() { document.getElementById('loginOverlay').classList.add('active'); }
+function closeLogin() { document.getElementById('loginOverlay').classList.remove('active'); }
+function doLogin() {
+  const u = document.getElementById('loginUser').value;
+  const p = document.getElementById('loginPass').value;
+  if(u==='admin' && p==='sherises2025') {
+    isAdmin = true; closeLogin();
+    document.getElementById('adminNavBtn').style.display='none';
+    document.getElementById('logoutBtn').style.display='block';
+    document.getElementById('addBlogBtn').classList.add('visible');
+    document.getElementById('editFloat').classList.add('visible');
+    renderBlogs(); showToast('✓ Admin Access Granted');
+  } else { showToast('✗ Invalid credentials'); }
+}
+function logout() {
+  isAdmin = false;
+  document.getElementById('adminNavBtn').style.display='block';
+  document.getElementById('logoutBtn').style.display='none';
+  document.getElementById('addBlogBtn').classList.remove('visible');
+  document.getElementById('editFloat').classList.remove('visible');
+  renderBlogs(); showToast('Logged out');
+}
+
+// ============= NAVIGATION =============
+function showPage(p) {
+  document.querySelectorAll('.page').forEach(el=>el.classList.remove('active'));
+  document.getElementById('blog-full-view').classList.remove('active');
+  document.querySelectorAll('.nav-links a').forEach(a=>a.classList.remove('active'));
+  const pg = document.getElementById('page-'+p);
+  if(pg) pg.classList.add('active');
+  const nav = document.getElementById('nav-'+p);
+  if(nav) nav.classList.add('active');
+  window.scrollTo(0,0);
+}
+
+// ============= BLOG RENDER — NEWSPAPER STYLE =============
+function renderBlogs(filter='all') {
+  const container = document.getElementById('blogsNewspaper');
+  if(!container) return;
+  const filtered = filter==='all' ? blogs : blogs.filter(b=>b.category===filter);
+  document.getElementById('blogCount').textContent = `Showing ${filtered.length} of ${blogs.length} stories`;
+  if(!filtered.length) { container.innerHTML='<p style="padding:4rem 6vw;color:var(--warm-gray)">No stories in this category yet.</p>'; return; }
+
+  let html = '';
+  const adminClass = isAdmin ? 'is-admin' : '';
+  // First row: big + 2 small
+  if(filtered.length > 0) {
+    const big = filtered[0];
+    html += `<div class="blogs-row-big">`;
+    html += blogBigCard(big);
+    html += `<div class="blog-col-divider"></div>`;
+    html += `<div style="display:flex;flex-direction:column;border-right:1px solid var(--line);">`;
+    if(filtered[1]) html += blogSmCard(filtered[1]);
+    if(filtered[2]) html += blogSmCard(filtered[2]);
+    html += `</div>`;
+    html += `<div class="blog-col-divider"></div>`;
+    html += `<div style="display:flex;flex-direction:column;">`;
+    if(filtered[3]) html += blogSmCard(filtered[3]);
+    if(filtered[4]) html += blogSmCard(filtered[4]);
+    html += `</div>`;
+    html += `</div>`;
+  }
+  // Remaining rows of 4
+  for(let i=5; i<filtered.length; i+=4) {
+    html += `<div class="blogs-row-small">`;
+    for(let j=i; j<Math.min(i+4,filtered.length); j++) {
+      html += blogMiniCard(filtered[j]);
+    }
+    html += `</div>`;
+  }
+  container.innerHTML = html;
+
+  // Home sidebar
+  const sidebar = document.getElementById('home-feat-sidebar');
+  if(sidebar) {
+    sidebar.innerHTML = blogs.slice(1,5).map(b=>`
+      <div class="feat-side-item" onclick="showPage('blogs');setTimeout(()=>openBlog(${b.id}),100)">
+        <div class="feat-side-cat">${b.category}</div>
+        <h4>${b.title}</h4>
+      </div>
+    `).join('');
+  }
+  if(blogs[0]) {
+    const ft = document.getElementById('home-feat-title');
+    const fe = document.getElementById('home-feat-excerpt');
+    if(ft) ft.textContent = blogs[0].title;
+    if(fe) fe.textContent = blogs[0].excerpt;
+  }
+}
+
+function blogBigCard(b) {
+  return `<div class="blog-big-card" style="position:relative" onclick="openBlog(${b.id})">
+    ${isAdmin?`<button class="admin-edit-badge" onclick="event.stopPropagation();editBlog(${b.id})">✎ Edit</button>`:''}
+    <img src="${b.img}" alt="${b.title}">
+    <div class="blog-cat-label">${b.category}</div>
+    <h3 class="blog-card-title">${b.title}</h3>
+    <p class="blog-excerpt">${b.excerpt}</p>
+    <div class="blog-meta"><span>${b.author}</span><span>${b.date}</span></div>
+    <a class="blog-read-link" onclick="event.stopPropagation();openBlog(${b.id})">Read Full Story →</a>
+  </div>`;
+}
+function blogSmCard(b) {
+  return `<div class="blog-sm-card" style="position:relative;border-bottom:1px solid var(--line)" onclick="openBlog(${b.id})">
+    ${isAdmin?`<button class="admin-edit-badge" onclick="event.stopPropagation();editBlog(${b.id})">✎ Edit</button>`:''}
+    <img src="${b.img}" alt="${b.title}">
+    <div class="blog-cat-label">${b.category}</div>
+    <h3 class="blog-card-title">${b.title}</h3>
+    <div class="blog-meta" style="margin-top:0.5rem"><span>${b.author}</span></div>
+    <a class="blog-read-link" onclick="event.stopPropagation();openBlog(${b.id})">Read →</a>
+  </div>`;
+}
+function blogMiniCard(b) {
+  return `<div class="blog-mini-card" style="position:relative" onclick="openBlog(${b.id})">
+    ${isAdmin?`<button class="admin-edit-badge" onclick="event.stopPropagation();editBlog(${b.id})">✎ Edit</button>`:''}
+    <img src="${b.img}" alt="${b.title}">
+    <div class="blog-cat-label">${b.category}</div>
+    <h3 class="blog-card-title">${b.title}</h3>
+    <div class="blog-meta" style="margin-top:0.5rem"><span>${b.author}</span></div>
+    <a class="blog-read-link" onclick="event.stopPropagation();openBlog(${b.id})">Read →</a>
+  </div>`;
+}
+
+function filterBlogs(cat, btn) {
+  document.querySelectorAll('.fbtn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  renderBlogs(cat);
+}
+
+// ============= OPEN BLOG =============
+function openBlog(id) {
+  const b = blogs.find(x=>x.id===id);
+  if(!b) return;
+  currentBlogId = id;
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  const fv = document.getElementById('blog-full-view');
+  fv.classList.add('active');
+  window.scrollTo(0,0);
+  const faqsHtml = b.faqs.map(f=>`
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">${f.q}<span class="faq-arrow">+</span></div>
+      <div class="faq-a"><p>${f.a}</p></div>
+    </div>
+  `).join('');
+  document.getElementById('blog-full-content').innerHTML = `
+    <div class="blog-full-hero">
+      <div class="blog-full-hero-text">
+        <div class="cat-badge">● ${b.category}</div>
+        <h1>${b.title}</h1>
+        <div class="hero-meta">
+          <span>✍ ${b.author}</span>
+          <span>📅 ${b.date}</span>
+          <span>⏱ ~${Math.ceil((b.content.split(' ').length)/200)} min</span>
+          ${isAdmin?`<button onclick="editBlog(${b.id})" style="background:var(--saffron);border:none;padding:0.2rem 0.8rem;font-family:'IBM Plex Mono',monospace;font-size:0.65rem;font-weight:600;cursor:pointer;color:var(--ink);letter-spacing:0.08em;text-transform:uppercase">✎ EDIT</button>`:''}
+        </div>
+      </div>
+      <div class="blog-full-hero-img"><img src="${b.img}" alt="${b.title}"></div>
+    </div>
+    <div class="blog-full-content">
+      ${b.content}
+      <div class="key-takeaways">
+        <h3>Key Takeaways</h3>
+        <ul>
+          <li>First-hand research and lived experience ground every argument in this piece</li>
+          <li>Systemic change requires naming systemic causes — not just individual behaviours</li>
+          <li>The most marginalized women bear the greatest burden and deserve centred attention</li>
+          <li>Evidence-based policy, not good intentions, produces lasting change</li>
+          <li>Women's leadership produces measurably better outcomes across sectors</li>
+        </ul>
+      </div>
+      <div class="conclusion-box">
+        <h3>Conclusion</h3>
+        <p>This story is one thread in a vast tapestry of women's experience — diverse, contradictory, extraordinary, and ordinary all at once. At SheRises, we believe the act of telling it honestly, with rigor and without flinching, is itself a form of resistance. Share it, discuss it, disagree with it, and add your own voice to the conversation. That is how the world changes.</p>
+      </div>
+      <div class="faq-section">
+        <h2>Frequently Asked Questions</h2>
+        ${faqsHtml}
+      </div>
+    </div>
+  `;
+}
+
+function closeBlogView() {
+  document.getElementById('blog-full-view').classList.remove('active');
+  document.getElementById('page-blogs').classList.add('active');
+  document.getElementById('nav-blogs').classList.add('active');
+  window.scrollTo(0,0);
+}
+
+function toggleFaq(el) {
+  const a = el.nextElementSibling;
+  const open = a.classList.contains('open');
+  document.querySelectorAll('.faq-a.open').forEach(x=>x.classList.remove('open'));
+  document.querySelectorAll('.faq-q.open').forEach(x=>{x.classList.remove('open');x.querySelector('.faq-arrow').textContent='+';});
+  if(!open) { a.classList.add('open'); el.classList.add('open'); el.querySelector('.faq-arrow').textContent='×'; }
+}
+
+// ============= ADD BLOG =============
+function openAddBlog() { if(!isAdmin){openLogin();return;} document.getElementById('addBlogOverlay').classList.add('active'); }
+function closeAddBlog() { document.getElementById('addBlogOverlay').classList.remove('active'); }
+function switchTab(mode, btn) {
+  tabMode = mode;
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById('tab-text').style.display = mode==='text'?'block':'none';
+  document.getElementById('tab-code').style.display = mode==='code'?'block':'none';
+}
+function publishStory() {
+  let title,cat,author,img,content;
+  if(tabMode==='text') {
+    title=document.getElementById('nt-title').value.trim();
+    cat=document.getElementById('nt-cat').value;
+    author=document.getElementById('nt-author').value.trim()||'SheRises Contributor';
+    img=document.getElementById('nt-img').value.trim()||'https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=900&auto=format&fit=crop&q=80';
+    const raw=document.getElementById('nt-content').value.trim();
+    if(!title||!raw){showToast('✗ Title and content required');return;}
+    content=raw.split('\n\n').map(p=>`<p>${p.trim()}</p>`).join('');
+  } else {
+    title=document.getElementById('nc-title').value.trim();
+    cat=document.getElementById('nc-cat').value;
+    author=document.getElementById('nc-author').value.trim()||'SheRises Contributor';
+    img=document.getElementById('nc-img').value.trim()||'https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=900&auto=format&fit=crop&q=80';
+    content=document.getElementById('nc-code').value.trim();
+    if(!title||!content){showToast('✗ Title and HTML content required');return;}
+  }
+  blogs.unshift({
+    id:Date.now(), title, category:cat, author,
+    date:new Date().toLocaleDateString('en-GB',{year:'numeric',month:'long',day:'numeric'}),
+    img, excerpt:content.replace(/<[^>]+>/g,'').slice(0,200)+'...',
+    content,
+    faqs:[{q:'What is this article about?',a:title},{q:'Who wrote this?',a:author},{q:'When was this published?',a:'Just now'},{q:'Can I share this?',a:'Absolutely — please do.'},{q:'How can I respond?',a:'Use our contact form to send your thoughts to the editorial team.'}]
+  });
+  closeAddBlog();
+  renderBlogs();
+  showToast('✓ Story published successfully!');
+}
+
+// ============= EDIT =============
+function editBlog(id) {
+  if(!isAdmin) return;
+  const b = blogs.find(x=>x.id===id);
+  if(!b) return;
+  currentEditId = id;
+  document.getElementById('editModalContent').innerHTML = `
+    <div class="fg"><label>Title</label><input type="text" id="ei-title" value="${b.title.replace(/"/g,'&quot;')}"></div>
+    <div class="fg"><label>Category</label><select id="ei-cat">${['Entrepreneurship','Wellness','Politics','Science','Arts','Education','Environment'].map(c=>`<option ${c===b.category?'selected':''}>${c}</option>`).join('')}</select></div>
+    <div class="fg"><label>Author</label><input type="text" id="ei-author" value="${b.author}"></div>
+    <div class="fg"><label>Cover Image URL</label><input type="text" id="ei-img" value="${b.img}"></div>
+    <div class="fg"><label>Excerpt</label><textarea id="ei-excerpt" style="min-height:80px">${b.excerpt}</textarea></div>
+  `;
+  document.getElementById('editOverlay').classList.add('active');
+}
+function openEditModal() {
+  currentEditId = null;
+  document.getElementById('editModalContent').innerHTML = `
+    <p style="font-size:0.82rem;color:var(--warm-gray);margin-bottom:1.5rem">Currently editing the active page. For blog edits, use the ✎ Edit button on individual stories.</p>
+    <div class="fg"><label>Page Heading Override</label><input type="text" id="ei-heading" placeholder="Optional new heading..."></div>
+    <div class="fg"><label>Page Subheading / Description</label><textarea id="ei-sub" style="min-height:80px" placeholder="Optional new description..."></textarea></div>
+  `;
+  document.getElementById('editOverlay').classList.add('active');
+}
+function closeEditModal() { document.getElementById('editOverlay').classList.remove('active'); }
+function saveEdit() {
+  if(currentEditId) {
+    const b = blogs.find(x=>x.id===currentEditId);
+    if(b) {
+      b.title = document.getElementById('ei-title')?.value || b.title;
+      b.category = document.getElementById('ei-cat')?.value || b.category;
+      b.author = document.getElementById('ei-author')?.value || b.author;
+      b.img = document.getElementById('ei-img')?.value || b.img;
+      b.excerpt = document.getElementById('ei-excerpt')?.value || b.excerpt;
+      renderBlogs();
+      if(currentBlogId===currentEditId) openBlog(currentEditId);
+    }
+  }
+  closeEditModal();
+  showToast('✓ Changes saved!');
+}
+
+// ============= TOAST =============
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'), 3200);
+}
+
+// ============= INIT =============
+renderBlogs();
+</script>
+</body>
+</html>
